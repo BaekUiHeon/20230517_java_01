@@ -1,0 +1,5 @@
+package kh.kckass.oop.sample;
+
+public interface TestInterface {
+
+}

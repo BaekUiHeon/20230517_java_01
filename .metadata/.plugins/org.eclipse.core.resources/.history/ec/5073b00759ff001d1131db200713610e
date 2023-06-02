@@ -1,0 +1,10 @@
+package kh.kckass.oop.sample;
+
+public class TestPolymophism {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

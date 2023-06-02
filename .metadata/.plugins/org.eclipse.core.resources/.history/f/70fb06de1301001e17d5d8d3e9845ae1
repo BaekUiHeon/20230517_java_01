@@ -1,0 +1,50 @@
+package kh.lclass.oop.sample;
+
+import java.io.Serializable;
+
+public class Kh implements TestInterface, Serializable {
+	private static final long serialVersionUID = 4332607456787281223L;
+	
+	public void khSpecial() {
+		String str="11111222222222222";
+		try {
+			Car[] carArr= new Car[3];
+			carArr[0].setPrice(5000);
+			
+			int a=Integer.parseInt(str);
+			int c=10/0;
+			c=0/10;
+			}
+		catch(NumberFormatException e) {
+			System.out.println(Integer.MAX_VALUE+"까지의 정수만 입력해주세요");
+			e.printStackTrace();
+		}
+		catch(ArithmeticException e) {
+			System.out.println("0으로 나눈 수는 나타낼 수 없습니다.");
+			e.printStackTrace();
+		}
+		catch(Exception e) {
+			System.out.println("배열에서 객체가 생성되지 않았습니다.");
+			e.printStackTrace();
+		}
+	
+	}
+	@Override
+	public void method1() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String method2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int method3(int a, int b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

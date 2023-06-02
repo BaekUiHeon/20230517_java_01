@@ -1,0 +1,19 @@
+package kh.kckass.oop.sample;
+
+public class Driver {
+	private int license;
+	private int money=1000;
+	
+	//자동차를 구매 
+	public void buy(Car c) {
+		if(money>c.getPrice())
+			System.out.println("구매확정");
+		else
+			System.out.println("잔액부족");
+	}
+}
+	
+	//운전하다
+	/*
+	 * public void driving() { }
+	 */
