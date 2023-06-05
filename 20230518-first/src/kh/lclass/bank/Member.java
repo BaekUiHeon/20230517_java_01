@@ -52,6 +52,6 @@ public class Member {
 			System.out.println("다른 창구를 이용해주세요.");
 		}
 		
-		
+		sc.close();
 	}
 }

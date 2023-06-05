@@ -16,6 +16,7 @@ public class ControlPractice {
 		else {
 			System.out.println("양수만 입력해주세요.");
 		}
+		sc.close();
 	}
 	public void practice3() {
 		Scanner sc = new Scanner(System.in);
@@ -41,7 +42,7 @@ public class ControlPractice {
 		else {
 			System.out.println("불합격입니다.");
 		}
-		
+		sc.close();
 	}
 
 		
