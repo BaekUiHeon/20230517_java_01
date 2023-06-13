@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="07_objectArray/src"/>
+	<classpathentry kind="src" path="20230518-first/src"/>
+	<classpathentry kind="src" path="20230526_java/src"/>
+	<classpathentry kind="src" path="20230612_쪽지/src"/>
+	<classpathentry kind="src" path="Homework10/src"/>
+	<classpathentry kind="src" path="Homework2_OOP/src"/>
+	<classpathentry kind="src" path="Homework2_OPP2/src"/>
+	<classpathentry kind="src" path="kh_practice/src"/>
+	<classpathentry kind="src" path="tranfer1/src"/>
+	<classpathentry kind="output" path="07_objectArray/bin"/>
+</classpath>
