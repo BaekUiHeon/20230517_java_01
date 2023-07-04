@@ -1,0 +1,703 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+    $(loadedHandler); // loadedHandler라는 함수를, body의 document가 모두 구성된후 실행함.
+              
+    function loadedHandler() {
+        $(".top_menu ul li a").hover(openTopMenu, closeTopMenu);
+        $(".top_menu ul li ul").hover(openTopMenu1, closeTopMenu1);
+        $(".foot_menu li button").on("click", footMenuToggle);
+        document.body.onscroll = scroll_EffectHandler;
+
+        const backToTopButton = document.querySelector("#btn_top");
+        window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 200) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    });
+    backToTopButton.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+        }
+
+
+    function openTopMenu() {
+        $(this).next().css("display", "block");
+        $(this).css("color", "#f1648a");
+    }
+    function closeTopMenu() {
+        $(this).next().css("display", "none");
+        $(this).css("color", "black");
+    }
+    function openTopMenu1() {
+        $(this).css("display", "block");
+    }
+    function closeTopMenu1() {
+         $(this).css("display", "none");
+     }
+     function footMenuToggle() {
+        $(this).next().toggle();
+        if ($(this).parent().next().children("ul").css("display") === "block") {
+            $(this).parent().next().children("ul").toggle();
+        }
+        if ($(this).parent().prev().children("ul").css("display") === "block") {
+            $(this).parent().prev().children("ul").toggle();
+        }
+    }
+    function scroll_EffectHandler() {
+        console.log("scroll_Effect 실행됨");
+        $(".scrollEffect").each(function (i) {
+            var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+            if (bottom_of_window > bottom_of_element) {
+                console.log($(this));
+                $(this).animate({ opacity: 1 }, 700);
+            }
+        });
+    }
+
+    </script>
+     <!--body와 header에 대한-->
+    <style>
+        .scrollEffect{
+            opacity: 0;
+        }
+        body{
+            position: relative;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        *::selection {
+            background-color: #f1648a;
+            color: #fff;
+        }
+        .Enquiries_for_membership{
+            z-index: 100;
+            position: fixed;
+            top: 150px;
+            right: 100px;
+        }
+        header{
+            width: 100%;
+            position: absolute;
+            padding:0;
+        }
+        header .top_logo a{
+            position: relative;
+            top: 15px;
+            left: 400px;
+        }
+        header .top_fixed{
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.61);
+            z-index: 100;
+            position: fixed;
+            top: 0;
+        }
+        header .top_menu{
+            position: relative;
+            top:-30px;
+            left: 900px;
+        }
+        header .top_menu>ul{
+            width: 1000px;
+            height: 0px;
+            display: flex;
+            list-style-type: none;
+        }
+        header .top_menu ul>li{
+            width: 150px;
+            font-family: 'Nanum Gothic', sans-serif; 
+            text-align: center;
+        }
+        header .top_menu ul li a{
+            font-size: 17px;
+            font-weight: bold;
+            text-decoration: none;
+            color:  rgb(116, 113, 113);
+        }
+        header .top_menu ul li ul{
+            background-color: white;
+            display: none;
+            border: 1px solid gainsboro ;
+            border-radius: 4%;
+            padding: 0;
+            list-style-type: none;
+        }
+        header .top_menu ul li ul li{  
+            line-height: 40px;
+            height: 45px;
+            padding: 0;
+            margin: 0;
+        }
+        header .top_img{
+            z-index: -9999;
+            background-color: #ebbdc5;
+            position: absolute;
+            margin: 58px 0;
+            padding: 0;
+            width: 100%;
+        }
+        .content p{
+            font-weight: 200;
+        }
+        .title p{
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        p span{
+            font-weight: bold;
+        }
+        .pink{
+            color: #f1658a;
+        }
+        p{
+            font-size: 20px;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+        .history_introduce li,.description p{
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+    </style>
+    <style>
+        main{
+            position: relative;
+            top: 400px;
+            width: 1100px;
+            margin: 0 auto;
+            }
+            .enter{
+                margin-bottom: 50px;
+            }
+        main .main_introduce img{
+            position: absolute;
+            top: 220px;
+            right: 0;
+        }
+        main .content p{
+            color:  rgb(43, 42, 42);
+            font-size: 19px;
+            font-weight: 500;
+            line-height: 0.8;
+        }
+        main .point_introduce .content ul{
+            box-sizing: 0;
+            padding: 0;
+            display: inline-block;
+            border: 1px solid black;
+            height: 320px;
+            width: 350px;
+            margin: 200px 0px;
+        }
+        main .point_introduce .content ul li{
+            font-size: 17px;
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: bold;
+            list-style-type: none;
+            text-align: center;
+        }
+        main .point_introduce .content ul:nth-of-type(3){
+            position: relative;
+            top: -20px;
+        }
+        main .point_introduce .content ul p{  
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: bold; 
+            list-style-type: none;
+            text-align: center;
+        }
+        main .point_introduce .content ul img{
+            margin: 20px 0px 20px 110px;
+        }
+        main .youtube_introduce{
+            margin: 200px 0;
+        }  
+        main .bi_introduce ul{
+            box-sizing:border-box;
+            margin: 10px 0;
+            padding: 0;
+        }
+        main .bi_introduce ul li{
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            box-sizing:border-box;
+            position: relative;
+            display:inline-block;
+            border: 1px solid black;
+            margin: 10px 0px 10px 5px;
+            width: 490px;
+            height: 170px;
+        }
+
+        main .bi_introduce ul li:first-of-type{
+            width: 1000px;
+        }
+        main .bi_introduce ul li .icon{
+            line-height: 40px;
+            height: 40px;
+            position: absolute;
+            color:white;
+            background-color: black;
+            top: 0;
+            left: 0;
+        }
+        main .bi_introduce ul li:first-child img{
+            display: inline-block;
+            margin: 60px 300px;
+        }
+        main .bi_introduce ul li:nth-child(2) img{
+            display: inline-block;
+            margin: 60px 200px;
+        }
+        main .bi_introduce ul li:nth-child(3) img{
+            display: inline-block;
+            margin: 60px 160px;
+        }
+        main .color_introduce{
+            margin: 200px 0;
+        }
+        main .color_introduce .description ul{
+            margin: 0;
+            padding: 0;
+        }
+        main .color_introduce .description ul li{
+            display:inline-block;
+            box-sizing: border-box;
+            width: 320.33px;
+            height: 120px;
+            margin: 30px 0;
+        }
+        main .bi_introduce ul li:nth-of-type(3){
+            position: relative;
+            top:-45px;            
+        }
+        main .color_introduce .description ul li:nth-child(1){
+            background-color: #f1658a;
+        }
+        main .color_introduce .description ul li:nth-child(2){
+            background-color:#feb0c0;
+        }
+        main .color_introduce .description ul li:nth-child(3){
+            background-color:#f29ea3;
+        }
+        main .color_introduce .description ul li span{
+            font-weight: bold;
+            color: white;
+            padding-left: 20px;
+            line-height: 190px;
+        }
+        main .character_introduce ul{
+            margin: 80px;
+        }
+        main .character_introduce ul li{
+            display: inline-block;
+            list-style: none;
+            margin: 20px;
+        }
+        main .character_introduce ul li p{
+            text-align: center;
+        }
+        main .character_introduce ul li:last-child img{
+            padding-left: 15px;
+        }
+        
+        main .teen_introduce .description p span{
+            background-color: #ffe65a;
+        }
+        main .teen_introduce .description img{
+            margin: 40px 140px;
+        }
+        main .history_introduce{
+            margin:80 0 0 -80px;
+        }
+        main .history_introduce .description ul img{
+            margin-bottom: 20px;
+        }
+        main .history_introduce .description ul li{
+            width: 380px;
+            list-style-type: none;
+        }
+        main .history_introduce .description .odd{
+            margin-left: 700px;
+        }
+        main .history_introduce .description .even img{
+            margin-left: 285px;
+        }
+        main .history_introduce .description .even{
+            box-sizing: border-box;
+            width: 376px;
+            text-align: right; 
+        }
+        </style>
+        <!--footer에 대한-->
+        <style>   
+        footer{
+            font-family: 'Nanum Gothic', sans-serif;
+            margin: 300px 0 200px 0;
+            padding: 0;
+            width: 1400px;
+        }
+        footer .foot_menu{
+            position: relative;
+            bottom: 0px;
+            z-index: 100;
+            height: 40px;
+        }
+        footer ul{
+            margin: 0;
+            padding: 0;
+        }
+        footer>ul>li{
+            display: inline-block;
+            margin: 0 10px;
+            padding: 0;
+        }
+        footer ul>li a{
+            color: rgb(77, 75, 75);
+            display: inline-block;
+            font-weight: bold;
+            font-size: 17px;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 0;
+        }
+        footer ul>li button{
+            color: rgb(77, 75, 75);
+            font-weight: bold;
+            font-size: 17px;
+            padding: 0;
+            border: none;
+            background-color: white;
+        }
+        footer .foot_menu>li:nth-of-type(1){
+            width: 136px;
+            height: 23.4px;
+            z-index: 1;
+        }
+        footer .foot_menu>li:nth-of-type(2){
+            width: 68px;
+            height: 23.4px;
+            z-index: 1;
+        }
+        footer ul>li>ul{
+            position: absolute;
+            background-color: white;
+            top: 100%;
+            border: 1px solid rgb(116, 113, 113);
+            list-style-type: none;
+            width: 260px;
+            height: 70px;
+            line-height:1.5;
+            display: none;
+            padding: 0;
+            margin: 0;
+            text-align: start;
+        }
+        footer>ul>li:nth-child(2) ul{
+            z-index: 10;
+            width: 200px;
+            height: 100px;
+            margin: 0;
+        }
+        footer ul>li>ul>li{
+            margin: 5px;
+        }
+        footer ul>li>ul>li>a{
+            font-size: 15px;
+            margin: 0;
+            color:  rgb(77, 75, 75);
+        }
+        footer img{
+            position: absolute;
+            z-index: -10;
+            bottom: 200px;
+        }
+        footer>ul>li:last-child{
+            margin-bottom: 50px;
+        }
+        #btn_top{
+            position: absolute;
+            bottom: -200px;
+            right: 100px;
+        }
+    </style>
+    
+</head>
+<body>
+    <img src="/resources/img/Introduction_brand/btn_top.png" id="btn_top">
+    <div class="Enquiries_for_membership">
+    <a href="/franchise/partner.html"><img src="/resources/img/Introduction_brand/Enquiries_for_membership.png"></a>
+    </div>
+    <header>
+        <div class="top_fixed">
+        <span class="top_logo">
+            <a href="/brand.html"><img src="/resources/img/Introduction_brand/from_open_storage.png"></a>
+        </span>
+        <span class="top_menu">
+            <ul>
+               <li><a href="/brand.html" class="menu">소개</a>
+                    <ul class="menu">
+                        <li><a href="/brand.html">브랜드소개</a></li>
+                        <hr color="gainsboro" width="120px">
+                        <li><a href="/app.html">앱소개</a></li>
+                    </ul>
+                </li>
+                <li><a href="/menu.html">메뉴</a></li>
+                <li><a href="/index.html">매장찾기</a></li>
+                <li><a href="/news.html">소식</a></li>
+                <li><a href="/recruit.html">채용</a></li>
+                <li><a href="/recruit.html" class="menu">직가맹점</a>
+                    <ul class="menu">
+                        <li><a href="/franchise/compete.html">브랜드 경쟁력</a></li>
+                        <hr color="gainsboro" width="120px">
+                        <li><a href="/franchise/interior.html">인테리어 특장점</a></li>
+                        <hr color="gainsboro" width="120px">
+                        <li><a href="/store/partner.html">직영점 입점제안</a></li>
+                        <hr color="gainsboro" width="120px">
+                        <li><a href="/franchise/partner.html">가맹점 창업문의</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </span>
+    </div>
+        <div class="top_img">
+            <img src="/resources/img/Introduction_brand/introduce-top-visual.2fd12619fb9a67d2971b.png">
+        </div>
+    </header>
+    <main>
+        <div class="main_introduce">
+            <div class="title top">      
+            <p>호랭다방 소개<p>
+            <hr>
+            <br>          
+            </div>
+            <img src="/resources/img/Introduction_brand/coffee.png">
+            <div class="content">
+            <br><br><br>
+            <p><span>“훌륭한 맛을 아는 자는 더 이상 헤매지 않는다.“</span></p>
+            <div class="enter"></div>
+            <p><span>“뛰어난 맛을 변함없이 유지할 수 있는 것이 맛의 제 1원칙이다.”</span></p>
+            <div class="enter"></div>
+            <p>호랭다방은 합리적인 가격에 고품질의 커피 그리고</p>
+            <p>신선한 베이커리를 제공받을 수 있는 <span>커피 &디저트 브랜드</span>입니다.</p>
+            <div class="enter"></div>               
+            <p>에티오피아 최고급 원두(Guji)를 사용해</p>
+            <p>누구나 부담 없이 고품질의 커피를 향유할 수 있도록 노력했습니다.</p>      
+            <div class="enter"></div>          
+            <p>자체 개발한 키오스크 및 전용 APP으로</p>
+            <p>편리하고 빠르게 주문 결제할 수 있는 <span>원스톱 시스템</span>을 구축하였습니다.</p>
+            <p>또한 테이크 아웃-홀-배달을 동시에 할 수 있는</p>
+            <p>국내 유일, 국내 최초의 독자적 IT기술을 접목한 커피 전문 F&B입니다.</p>
+            <div class="enter"></div>              
+            <p>2017년 첫 시작으로 현재 약 90여 개의 매장을 직영으로 확장·운영하고 있습니다.</p>
+            <p>2023년부터는 가맹점을 통해 더 많은 분과 함께 하고자 합니다.</p>
+            <div class="enter"></div>              
+            <p>앞으로도 합리적인 가격에 맛과 감성을 놓치지 않겠습니다. 호랭다방은 커피 프랜차이즈의 미래입니다.</p>
+            </div>
+        </div>
+        <div class="point_introduce">         
+            <div class="content">
+                <ul class="scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_order_system.png">
+                    <p class="pink">편리한 주문 시스템</p>
+                    <li> APP 모바일 주문과</li>
+                    <li>키오스크 시스템으로</li>
+                    <li>고객의 기다림을 최소화하는</li>
+                    <li>편리한 주문 시스템입니다.</li>
+                </ul>
+                <ul class="scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_premium.png">
+                    <p class="pink">프리미엄 커피</p>
+                    <li>고품질의 원두를 자체 물류를 통해</li>
+                    <li>선도와 풍미를 최상으로 유지합니다.</li>
+                    <li>고성능 머신으로 정교한 맛의</li>
+                    <li>에스프레소를 선사합니다.</li>
+                </ul>
+                <ul class="scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_bigsize.png">
+                    <p class="pink">대용량 사이즈</p>
+                    <li>오랜 시간 커피&음료의</li>
+                    <li>맛을 즐기실 수 있도록</li>
+                    <li>대용량 사이즈로 서비스합니다.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="youtube_introduce">
+        <iframe width="1000" height="562" src="https://www.youtube.com/embed/alcePiWAdI8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>">
+        </div>
+        <div class="bi_introduce">
+            <div class="title">
+            <p>BI</p>
+            </div>
+            <div class="description">
+            <p><span class="pink">호랭</span>다방에서<span class="pink">호랑이(tiger)</span> + <span class="pink">프리미엄 원두</span>를 안고 있는 모습을 형상화한 심볼은</p>
+            <p>친근함과 작은 즐거움을 선사합니다.</p>
+            </div>
+            <ul>
+                <li><span class="icon">MANI BI</span><img src="/resources/img/Introduction_brand/i_bana_bi.png" class="scrollEffect"></li>
+                <li><span class="icon">SYMBOL</span><img src="/resources/img/Introduction_brand/i_bana_symbol.png" class="scrollEffect"></li>
+                <li><span class="icon">SUB BI</span><img src="/resources/img/Introduction_brand/i_bana_sub_bi.png" class="scrollEffect"></li>
+            </ul>
+        </div>
+        <div class="color_introduce">
+            <div class="title">
+            <p>COLOR</p>
+            </div >
+            <div class="description">
+            <p>호랭다방 브랜드 컬러인 핑크는 부드럽고 달콤한 맛과 따뜻한 친절을 대표하는 색깔입니다.</p>
+            <p>맛있는 음료와 디저트로 고객들에게 만족과 행복감을 주고,</p>
+            <p>바쁜 일상 속에서 잠시 쉬어 갈 수 있는 장소가 되겠다는 브랜드 정체성을 컬러로 표현하였습니다.</p>
+            <br>
+            <ul>
+            <li class="scrollEffect"><span>호랭 핑크 ㅣPantone 709C</span></li><li class="scrollEffect"><span>베이비 핑크 ㅣPantone 1767C</span></li><li class="scrollEffect"><span>피치 핑크 ㅣPantone 1775C</span></li>
+            </ul>
+            </div>
+        </div>
+        <div class="character_introduce">
+            <div class="title">
+            <p>CHARACTER</p>
+            </div>
+            <div class="description">
+            <p>시그니처 메뉴인 아메리카노와 <span class="pink">NEW 복숭아 아이스티</span>에서 영감을 얻어 개발한 캐릭터 에티 & 복티는</p>
+            <p>고객 커뮤니케이션, MD 상품 등에서 다양하게 활동하고 있는 호랭다방 마스코트 입니다.</p>
+            <br>
+            <p>메인 마스코트인 ‘에티’는 빠른 스피드를 자랑하는 토끼 캐릭터로서,</p>
+            <p>IT 기술을 접목한 스마트한 장비들을 통해 빠르게 음료를 제조하고</p>
+            <p>신속하게 고객에게 제공하는 호랭다방의 서비스를 닮았습니다.</p>
+            <br>
+            <p>또한 주변 환경 변화에 민감하게 반응하는 토끼처럼,</p>
+            <p>여느 브랜드보다 먼저 자동화&무인화 솔루션을 준비하며</p>
+            <p>발 빠르게 변화하고 있는 하이엔드 카페 브랜드 호랭다방입니다.</p>
+            </div>
+            <ul>
+                <li><img src="" class="comment1"><img src="/resources/img/Introduction_brand/baby_ethi.png" class="scrollEffect"><p class="name pink">에티ETHI</p><p><span class="favort pink">최애음료| </span class="tea"><span>생과일 쥬스</span></p></li>
+                <li><img src="" class="comment2"><img src="/resources/img/Introduction_brand/ethi.png" class="scrollEffect"><p class="name pink" >에티ETHI</p><p><span class="favort pink">최애음료| </span><span class="tea">아메리카노</span></p></li>
+                <li><img src="" class="comment3"><img src="/resources/img/Introduction_brand/bokthi.png" class="scrollEffect"><p class="name pink">복티 BOKTHI</p><p><span class="favort pink">최애음료 | </span><span class="tea">복숭아 아이스티</span></p></li>
+            </ul>
+        </div>
+        <div class="teen_introduce">
+            <div class="title">
+                <p>호랭다방(TEEN)</p>
+            </div>
+            <div class="description">
+                <p>호랭다방 (TEEN)은 더 많은 지역에서 더 많은 고객들이 자사 브랜드를 경험할 수 있도록,</p>
+                <p><span>창업 비용의 부담을 획기적으로 낮추어 런칭한 호랭다방의 서브 브랜드입니다.</span></p>
+                <br>               
+                <p>밝고 화사한 노란색과 따뜻하고 달콤한 바나 핑크가 어우러진</p>
+                <p>호랭다방 (TEEN)의 인테리어 컨셉은 머무는 분들로 하여금 긍정적이고 기분 좋은 장소로 기억 될 수 있게 만듭니다.</p>
+                <img src="/resources/img/Introduction_brand/intro-bana2000.png">
+            </div>
+        </div>
+        <div class="history_introduce">
+            <div class="title">
+                <p>걸어온 길</p>
+            </div>
+            <div class="description">
+                <p>2017년, 1호점인 논현점을 시작으로</p>
+                <p>커피는 물론 차별화된 제품과 서비스를 선보였습니다.</p>
+                <ul class="odd scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2023.png">
+                    <li>ㆍ호랭다방 (TEEN) 런칭</li>
+                    <li>ㆍ자체 물류센터 오픈 예정</li>
+                    <li>ㆍ정기 사업설명회 개최</li>
+                    <li>ㆍ캐릭터 ‘에티복티’ 인스타툰 오픈</li>
+                </ul>
+                <ul class="even scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2022.png">
+                    <li>ㆍ자동 우유스팀기 개발</li>
+                    <li>ㆍ수온 조절 핫워터 디스펜서 개발</li>
+                    <li>ㆍ사이드 결제 전용 POS 개발</li>
+                    <li>ㆍ직영 80호점 : 구로비즈메트로점 오픈</li>
+                    <li>ㆍ가맹 1호점 : 충무로점 오픈</li>
+                    <li>ㆍ가맹 2호점 : 홍대입구역사거리점 오픈 </li>
+                </ul>
+                <ul class="odd scrollEffect" >
+                    <img src="/resources/img/Introduction_brand/i_2021.png">
+                    <li>ㆍ높이 조절 키오스크 개발</li>
+                    <li>ㆍ직영 70호점 : 방배역점 오픈</li>
+                    <li>ㆍ캐릭터 ‘복티’ 개발 / 상표권 등록</li>
+                    <li>ㆍ직영 매출 200억 돌파</li>
+                    <li>ㆍHACCP 생산 시설 오픈</li>
+                </ul>
+                <ul class="even scrollEffect" >
+                    <img src="/resources/img/Introduction_brand/i_2020.png">
+                    <li>ㆍ직영 55호점 삼성중앙역점 오픈</li>
+                </ul>
+                <ul class="odd scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2019.png">
+                    <li>ㆍ자동 더치 추출 머신 개발</li>
+                    <li>ㆍ직영 40호점 돌파</li>
+                    <li>ㆍ쿠키/마카롱 생산시설 신설</li>
+                    <li>ㆍ베이커리 R&amp;D PART 신설</li>
+                </ul>
+                <ul class="even scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2018.png">
+                    <li>ㆍBANA APP. (V.2.1 출시)</li>
+                    <li>ㆍ직영 10호점 돌파</li>
+                    <li>ㆍ캐릭터 ‘에티’ 개발</li>
+                    <li>ㆍ호랭 태그 라벨 시스템 개발</li>
+                </ul>
+                <ul class="odd scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2017.png">
+                    <li>ㆍ호랭다방 설립</li>
+                    <li>ㆍFOOD PRO : 자체 매장관리 프로그램 출시</li>
+                    <li>ㆍ호랭다방 자체 APPLICATION<br>&nbsp;&nbsp;&nbsp;바나 APP 론칭</li>
+                    <li>ㆍ직영 1호점 : 논현점 오픈</li>
+                    <li>ㆍR&amp;D 연구실 신설</li>
+                </ul>
+                <ul class="even scrollEffect">
+                    <img src="/resources/img/Introduction_brand/i_2016.png">
+                    <li>ㆍ프랜차이즈 사업본부 구성</li>
+                </ul>
+            </div>
+        </div>
+    <footer>
+        <img src="/resources/img/Introduction_brand/footer_logo.png">
+        
+        <ul class="foot_menu">
+            <li><button type="button">개인정보처리방침</button>
+                <ul>
+                    <li><a href="/termsofservice">호랭다방앱 개인정보 처리방침</a></li><!--
+                    --><li><a href="/termsofgift">기업사이트 개인정보 처리방침</a></li>
+                </ul>
+            </li>
+            <li><button type="button">이용약관</button>
+                <ul>
+                    <li><a href="/termsofservice">이용약관</a></li><li><a href="/termsofgift">충전식 상품권 약관</a></li><li><a href="/termsofpoint">잔돈포인트 약관</a></li>
+                </ul>
+            </li>
+            <li><a href="/recruit.html" class="bold">채용</a></li> <!--
+        --><li><a href="/store/partner.html" class="bold">입점제안</a></li><!--
+        --><li><a href="/franchise/partner.html" class="bold">가맹점 문의</a></li><!--
+        --><li><a href="#" class="bold">제휴문의</a></li><!--
+        --><li><a href="#" class="bold">매장 이용 및 고객문의</a></li>
+        </ul>
+        <ul>
+            <li class="bold">상호명: 주식회사 호랭다방</li>
+            <li>대표자명 : 호랑이 |사업장 소재지 : 서울특별시 강남구 테헤란로10길 9 그랑프리 빌딩 4F, 5F, 7F |사업자번호 : 851-87-00622</li>
+            <li>대표전화 : 1544-9970 |Fax : 070-1234-5678 |이메일 : qna@horangtearoom.com 또는 1544-9970</li>
+            <li>© horangtearoom F&B. All Rights Reserved.</li>
+        </ul>
+    </footer>
+</main>
+</body>
+</html>
