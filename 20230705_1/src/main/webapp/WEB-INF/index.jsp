@@ -7,6 +7,10 @@
 <title>Hello</title>
 </head>
 <body>
+<a href="/join"><p>회원가입-절대위치-context path 누락됨. 사용 불가</p></a>
+<a href="./join"><p>회원가입 - 상대위치 - 고민..불편함</p></a>
+<a href="<%=request.getContextPath()%>/join"><p>회원가입</p></a>
+<h1><%=request.getContextPath()%><h1>
 <%
 	for(int i=0; i<10; i++){
 %>
