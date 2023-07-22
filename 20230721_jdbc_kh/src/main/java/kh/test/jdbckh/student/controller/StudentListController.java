@@ -18,7 +18,6 @@ import kh.test.jdbckh.student.model.vo.StudentVo;
 @WebServlet("/student/list") // url에 들어갈 문자 
 public class StudentListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,13 +25,13 @@ public class StudentListController extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/student/list doGet() 진입");
-		StudentDao dao=new StudentDao();
+		StudentDao dao=new StudentDao(); 
 		List<StudentVo> result = dao.selectListStudent();
 		request.setAttribute("studentList", result);
 		request.setAttribute("aaa", "AAA테스트");
@@ -46,5 +45,4 @@ public class StudentListController extends HttpServlet {
 //		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
-
 }
