@@ -1,43 +1,40 @@
 package kh.test.jdbckh.student.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.test.jdbckh.student.model.dao.StudentDao;
-import kh.test.jdbckh.student.model.vo.StudentVo;
+import kh.test.jdbckh.student.model.dao.DepartmentDao;
+import kh.test.jdbckh.student.model.vo.DepartmentVo;
 
 /**
- * Servlet implementation class StudentListController
+ * Servlet implementation class DeptGetController
  */
-@WebServlet({"/student/list", "/aaa"})
-public class StudentListController extends HttpServlet {
+@WebServlet("/onedepartment")
+public class DeptGetController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentListController() {
+    public DeptGetController() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/student/list doGet() 진입");
-		//TODO DB
-		StudentDao dao = new StudentDao();
-		List<StudentVo> result = dao.selectListStudent();
-		request.setAttribute("studentList", result);
-		request.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(request, response);
+		DepartmentDao dao= new DepartmentDao();
+		String dept=request.getParameter("deptno");
+		DepartmentVo vo=dao.selectOneDepartment(dept);
+		request.setAttribute("VO", vo);
+		request.getRequestDispatcher("/WEB-INF/view/tb_department_one.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

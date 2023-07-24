@@ -9,35 +9,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.test.jdbckh.student.model.dao.StudentDao;
-import kh.test.jdbckh.student.model.vo.StudentVo;
+import kh.test.jdbckh.student.model.dao.DepartmentDao;
+import kh.test.jdbckh.student.model.vo.DepartmentVo;
 
 /**
- * Servlet implementation class StudentListController
+ * Servlet implementation class DepartmentController
  */
-@WebServlet({"/student/list", "/aaa"})
-public class StudentListController extends HttpServlet {
+@WebServlet("/department")
+public class DepartmentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentListController() {
+    public DepartmentController() {
         super();
+        // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("/student/list doGet() 진입");
-		//TODO DB
-		StudentDao dao = new StudentDao();
-		List<StudentVo> result = dao.selectListStudent();
-		request.setAttribute("studentList", result);
-		request.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(request, response);
+		System.out.println("Do Get진입완료");
+		DepartmentDao dao= new DepartmentDao();
+		List<DepartmentVo> dplist=dao.selectListDepartment();
+		request.setAttribute("dplist",dplist);
+		request.getRequestDispatcher("/WEB-INF/view/tb_department.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,5 +42,4 @@ public class StudentListController extends HttpServlet {
 //		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
-
 }

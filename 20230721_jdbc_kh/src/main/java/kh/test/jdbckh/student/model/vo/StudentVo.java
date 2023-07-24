@@ -2,6 +2,13 @@ package kh.test.jdbckh.student.model.vo;
 import java.sql.Date;
 
 public class StudentVo {
+	private String departmentName;
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
 	private String studentNo;
 	private String departmentNo;
 	private String studentName;
