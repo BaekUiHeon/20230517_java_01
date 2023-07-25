@@ -1,5 +1,5 @@
 package kh.test.jdbckh.student.model.dao;
-
+import static kh.test.jdbckh.common.jdbc.JdbcTemplate.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,10 +16,7 @@ public class DepartmentDao {
 		ResultSet rs=null;
 		List<DepartmentVo> result=null;
 		try {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		System.out.println("드라이버 연결완료");
-		conn=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","kh","kh");
-		System.out.println("데이터베이스 접속완료.");
+		conn = getConnection();
 		pstmt=conn.prepareStatement("select * from tb_department");
 		rs=pstmt.executeQuery();
 		result=new ArrayList<DepartmentVo>();
@@ -33,24 +30,44 @@ public class DepartmentDao {
 			result.add(dept);
 		}
 		}
-		catch(ClassNotFoundException e) {
+		catch(SQLException e) {
 			e.printStackTrace();
+		}
+		finally {
+		close(rs);
+		close(pstmt);
+		close(conn);
+		}
+		return result;
+	}
+	public List<DepartmentVo> selectListDepartment(String searchWord){
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DepartmentVo> result=null;
+		try {
+		conn = getConnection();
+		pstmt=conn.prepareStatement("select * from tb_department where CATEGORY=?");
+		pstmt.setString(1,searchWord);
+		rs=pstmt.executeQuery();
+		result=new ArrayList<DepartmentVo>();
+		while(rs.next()==true) {
+			DepartmentVo dept= new DepartmentVo(); 
+			dept.setDepartmentNo(rs.getString("DEPARTMENT_NO"));
+			dept.setDepartmentName(rs.getString("DEPARTMENT_NAME"));
+			dept.setCategory(rs.getString("CATEGORY")); 
+			dept.setCapacity(rs.getInt("CAPACITY"));
+			dept.setOpenYN(rs.getString("OPEN_YN"));
+			result.add(dept);
+		}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			try{
-				if(rs!=null)
-					rs.close();
-				if(pstmt!=null)
-					pstmt.close();
-				if(conn!=null)
-					conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
+		close(rs);
+		close(pstmt);
+		close(conn);
 		}
 		return result;
 	}
@@ -61,10 +78,7 @@ public class DepartmentDao {
 		List<DepartmentVo> result=null;
 		DepartmentVo dept=null;
 		try {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		System.out.println("드라이버 연결완료");
-		conn=DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","kh","kh");
-		System.out.println("데이터베이스 접속완료.");
+		conn = getConnection();
 		pstmt=conn.prepareStatement("select * from tb_department where department_no="+"'"+deptNo+"'");
 		rs=pstmt.executeQuery();
 		rs.next();
@@ -75,24 +89,13 @@ public class DepartmentDao {
 		dept.setCapacity(rs.getInt("CAPACITY"));
 		dept.setOpenYN(rs.getString("OPEN_YN"));
 		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
 		finally {
-			try{
-				if(rs!=null)
-					rs.close();
-				if(pstmt!=null)
-					pstmt.close();
-				if(conn!=null)
-					conn.close();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
+		close(rs);
+		close(pstmt);
+		close(conn);
 		}
 		return dept;
 	}

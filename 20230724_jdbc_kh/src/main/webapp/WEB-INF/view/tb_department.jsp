@@ -13,7 +13,19 @@
 <h2> 학과목록 </h2>
 
 <%List<DepartmentVo> list=(ArrayList<DepartmentVo>)request.getAttribute("dplist"); %>
+<% String searchWord=(String)request.getAttribute("searchWord");%>
 <table border="1">
+	<form action ="<%=request.getContextPath()%>/department">
+		<input type="search" name="searchWord">
+		<input type="submit" value="찾기">
+		</form>
+		<%if(searchWord!=null){%>
+		<h3><%=searchWord%>검색결과</h3>
+		<h3><a href="<%=request.getContextPath()%>/student/list">전체보기</a></h3>
+		<%}%>
+		<%if(list==null || list.size()==0){%>
+		<h3>검색된 결과가 없습니다.</h3>
+		<% }else{ %>
 		<tr border="1">
 			<th>학과번호</th>
 			<th>학과이름</th>
@@ -34,6 +46,8 @@
 		<%
 		} 
 		%>
+		<%}%>
 </table>
+
 </body>
 </html>

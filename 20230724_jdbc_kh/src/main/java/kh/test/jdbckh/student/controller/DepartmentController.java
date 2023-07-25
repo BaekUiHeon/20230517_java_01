@@ -27,11 +27,19 @@ public class DepartmentController extends HttpServlet {
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 **/
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Do Get진입완료");
+		String searchWord=request.getParameter("searchWord");
 		DepartmentDao dao= new DepartmentDao();
-		List<DepartmentVo> dplist=dao.selectListDepartment();
+		List<DepartmentVo> dplist=null;
+		if(searchWord!=null) {
+			dplist=dao.selectListDepartment(searchWord);
+		}
+		else {
+			dplist=dao.selectListDepartment();
+		}
 		request.setAttribute("dplist",dplist);
 		request.getRequestDispatcher("/WEB-INF/view/tb_department.jsp").forward(request, response);
 	}

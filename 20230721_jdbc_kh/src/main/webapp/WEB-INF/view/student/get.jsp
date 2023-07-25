@@ -16,7 +16,7 @@
 		vo = (StudentVo)request.getAttribute("svo");
 	}
 	%>
-	<table>
+	<table border="1">
 		<tr>
 			<td>이름</td>
 			<td><%=vo.getStudentName() %></td>
