@@ -5,9 +5,7 @@
     <fullyQualifiedTypeName name="com.kh.hw.employee.model.vo.Employee"/>
     <fullyQualifiedTypeName name="com.kh.hw.employee.controller.EmployeeController"/>
     <fullyQualifiedTypeName name="com.kh.hw.employee.view.EmployeeMenu"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="kh.lclass.oop.sample.Car"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
@@ -27,4 +25,20 @@
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="Vo"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="home.test.jdbc.student.model.vo.StudentDao"/>
+    <fullyQualifiedTypeName name="home.test.jdbc.student.model.StudentVo"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="home.test.jdbc.student.model.model.StudentVo"/>
+    <fullyQualifiedTypeName name="home.test.jdbc.student.model.vo.StudentVo"/>
+    <fullyQualifiedTypeName name="home.test.jdbc.student.model.dao.StudentDao"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="department.model.dao.DepartmentDao"/>
+    <fullyQualifiedTypeName name="department.model.vo.DepartmentVo"/>
 </qualifiedTypeNameHistroy>
