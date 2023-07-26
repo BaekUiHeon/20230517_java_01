@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>학생 상세 정보</h1>
-	<%-- <%=request.getAttribute("svo") %> --%>
+	<%-- <%= request.getAttribute("svo") %> --%>
 	<%
 	StudentVo vo = null;
 	if(request.getAttribute("svo") instanceof StudentVo){
