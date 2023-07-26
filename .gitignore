@@ -1,7 +1,9 @@
 # Compiled class file
 *.class
 bin/
-
+.metadata/
+Servers/
+build/
 # Log file
 *.log
 
