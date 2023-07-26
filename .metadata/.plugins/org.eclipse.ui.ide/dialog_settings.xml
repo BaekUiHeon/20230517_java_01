@@ -7,6 +7,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\workspace\20230517_java_01\20230721_jdbc_kh"/>
 			<item value="D:\workspace\20230517_java_01\20230724_jdbc_kh"/>
 			<item value="D:\workspace"/>
 			<item value="D:\workspace\Gtihub"/>

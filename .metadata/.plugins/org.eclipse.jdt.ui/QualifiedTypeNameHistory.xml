@@ -41,4 +41,5 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="department.model.dao.DepartmentDao"/>
     <fullyQualifiedTypeName name="department.model.vo.DepartmentVo"/>
+    <fullyQualifiedTypeName name="kh.test.jdbckh.student.model.dao.StudentDao"/>
 </qualifiedTypeNameHistroy>

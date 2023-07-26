@@ -1,17 +1,5 @@
-INDEX VERSION 1.132
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1366124109.index
-\20230724_jdbc_home\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\737737115.index
-\20230704_first\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3744513518.index
-\20230724_jdbc_kh\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\657300892.index
-\20230722_jdbc_hometest2\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4194624898.index
-\20230722_jdbc_hometest\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2416836860.index
-\20230722_test\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3462220837.index
+INDEX VERSION 1.131
+C:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3462220837.index
 \20230721_jdbc_kh\src\main\java
-D:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1072640763.index
-\20230722_jdbc_hometest2\src\main\java
+C:\workspace\20230517_java_01\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1674872948.index
+\20230721_jdbc_kh\src\main\java
