@@ -34,7 +34,7 @@ public class StudentListController extends HttpServlet {
 		System.out.println("/student/list doGet() 진입");
 		//// 1. 전달받은 parameter 읽어내기
 		String searchWord = request.getParameter("searchWord");
-		String pageNoStr = request.getParameter("pageNo");
+		String pageNoStr = request.getParameter("pageNo"); //pageNo만을 이용해서 startNum,endNum,currentNum을구함.
 		// String --> int
 		int currentPage = 1;  // 현재페이지
 		int pageSize = 10;  // 페이지당 개수
@@ -53,19 +53,19 @@ public class StudentListController extends HttpServlet {
 		if(searchWord != null) {
 			// 검색
 			//result = service.selectListStudent(searchWord);
-			map = service.selectListStudent(currentPage, pageSize, searchWord);
+			map = service.selectListStudent(currentPage, pageSize, searchWord); //현재 페이지와 페이지사이즈와 검색어가 데이터를 구하기위한 입력값임.
 		} else {
 			// 전체
 //			result = dao.selectListStudent();
 			// 페이징
-			map = service.selectListStudent(currentPage, 10);
+			map = service.selectListStudent(currentPage, pageSize); //현재 페이지와 페이지사이즈가 데이터를 구하기위한 입력값임. 출력값으로는 List<student>와 총데이터갯수
 		}
 		// 3. DB로부터 전달받은 데이터를 JSP에 전달함.
 		request.setAttribute("studentList", map.get("studentList"));
 		// 페이징 - 
 		int pageBlockSize = 5;
-		int totalCnt = (Integer)map.get("totalCnt");
-		int totalPageNum = totalCnt/pageSize + (totalCnt%pageSize == 0 ? 0 : 1);
+		int totalCnt = (Integer)map.get("totalCnt");	// 총 데이터갯수
+		int totalPageNum = totalCnt/pageSize + (totalCnt%pageSize == 0 ? 0 : 1);	//총페이지수 = 데이터갯수/페이지사이즈, + 딱안떨어지면 +1
 		int startPageNum = 1;
 		if((currentPage%pageBlockSize) == 0) {
 			startPageNum = ((currentPage/pageBlockSize)-1)*pageBlockSize +1;
