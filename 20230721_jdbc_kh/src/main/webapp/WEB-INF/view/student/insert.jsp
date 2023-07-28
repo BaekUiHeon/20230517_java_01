@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>학생 등록</h2>
-	<div class="container">  <% // 이웹페이지에서는 StudentVo에 넣을 모든값들을 받는다. %>  
+	<div class="container">
 		<form action="<%=request.getContextPath() %>/student/insert.do" method="post">
 			<table>			
 				<tr>
