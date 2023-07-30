@@ -116,17 +116,17 @@
                     <th class="col3">제목</th>
                     <th class="col4">작성일</th>   
                 </tr>
-                <c:forEach items="list" item="contentvo">
+                <c:forEach items="${list}" var="item">
                 <tr> 
-                    <td>${contentvo.idx}</td>
-                    <td>${contentvo.writer}</td>
-                    <td>${contentvo.subject}</td>
-                    <td>${contentvo.wdate}</td>   
+                    <td>${item.idx}</td>
+                    <td>${item.writer}</td>
+                    <td>${item.subject}</td>
+                    <td>${item.wdate}</td>   
                 </tr>
                 </c:forEach>
                 %>
             </table>
-            <div class="write"><a>작성</a></div>
+            <div class="write"><a href="${request.getContextPath()}/semi/write?id=id">작성</a></div>
         </div>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>

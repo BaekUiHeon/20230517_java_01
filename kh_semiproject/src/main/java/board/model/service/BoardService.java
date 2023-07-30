@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import board.model.dao.BoardDao;
+import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 import static common.jdbc.JdbcTemplate.*;
@@ -41,9 +42,15 @@ public class BoardService {
 		int totalCnt= dao.getTotalCount(conn);
 		List<boardVo> list=null;
 		list=dao.selectList(conn,currentPage,pageSize,totalCnt);
-		map.put("totlaCnt",totalCnt);
+		map.put("totalCnt",totalCnt);
 		map.put("list",list);
 		close(conn);
 		return map;
+	}
+	public int signup(WriterVo vo) {
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		int result=dao.signup(conn,vo);
+		return result;
 	}
 }

@@ -2,6 +2,7 @@ package board.controller.login;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,13 +41,18 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService bs=new BoardService();
 		System.out.println("로그인 시도시작");
+		int currentPage=1;
+		int pageSize=10;
 		int result=0;
 		result = bs.login(request.getParameter("id"),request.getParameter("password"));
 		if(result==1) {
 			request.setAttribute("success", 1);
 			System.out.println("로그인 완료");
-			List<boardVo> list=bs.selectlist();
-			request.setAttribute("list", list)
+			Map<String,Object> map=bs.selectList(1,10);
+			List<boardVo> list=(List<boardVo>)map.get("list");
+			int totalCnt=(int)map.get("totalCnt");
+			request.setAttribute("totalCnt",totalCnt);
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/view/content/list.jsp").forward(request, response);	
 		}
 		if(result==0) {
@@ -55,5 +61,4 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
 		}
 	}
-
 }

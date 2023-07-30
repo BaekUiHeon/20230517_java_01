@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 public class BoardDao {
@@ -47,7 +48,7 @@ public class BoardDao {
 		endRownum = ((currentPage*pageSize) > totalCnt) ? totalCnt: (currentPage*pageSize);
 		System.out.println("startRownum:"+startRownum);
 		System.out.println("endRownum:"+endRownum);
-		String query="select * from (select tb1.*,rownum rn from((select IDX,SUBJECT,CONTENT,to_char(WDATE,'yyyy-mm-dd'),ID from TBL_BOARD order by IDX) Tb1) where rn between ? and ?)";	
+		String query="select * from (select tb1.*,rownum rn from((select writer,IDX,subject,content,to_char(WDATE,'yyyy-mm-dd') wdate,ID from TBL_BOARD join TBL_writer using (id) order by IDX) Tb1)) where rn between ? and ?";	
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1,startRownum);
@@ -56,12 +57,12 @@ public class BoardDao {
 			result=new ArrayList<boardVo>();
 			while(rs.next()==true) {
 				boardVo vo=new boardVo
-						(rs.getInt("NUMBER"),
-						rs.getString("SUBJECT"),
-						rs.getString("CONTENT"),
+						(rs.getString("idx"),
+						rs.getString("subject"),
+						rs.getString("content"),
 						rs.getString("wdate"),
 						rs.getString("id"));
-					result.add(vo);
+						result.add(vo);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -127,7 +128,7 @@ public class BoardDao {
 		endRownum = ((currentPage*pageSize) > totalCnt) ? totalCnt: (currentPage*pageSize);
 		System.out.println("startRownum:"+startRownum);
 		System.out.println("endRownum:"+endRownum);
-		String query="select * from (select tb1.*,rownum rn from((select IDX,SUBJECT,CONTENT,to_char(WDATE,'yyyy-mm-dd'),ID from TBL_BOARD where subject like ? or content like ? order by IDX) Tb1) where rn between ? and ?)";	
+		String query="select * from (select tb1.*,rownum rn from((select IDX,subject,content,to_char(WDATE,'yyyy-mm-dd'),ID from TBL_BOARD where subject like ? or content like ? order by IDX) Tb1) where rn between ? and ?)";	
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,searchWord);
@@ -138,9 +139,9 @@ public class BoardDao {
 			result=new ArrayList<boardVo>();
 			while(rs.next()==true) {
 				boardVo vo=new boardVo
-						(rs.getInt("NUMBER"),
-						rs.getString("SUBJECT"),
-						rs.getString("CONTENT"),
+						(rs.getString("idx"),
+						rs.getString("subject"),
+						rs.getString("content"),
 						rs.getString("wdate"),
 						rs.getString("id"));
 					result.add(vo);
@@ -153,6 +154,27 @@ public class BoardDao {
 			close(pstmt);
 			close(rs);
 			}
+		return result;
+	}
+	public int signup(Connection conn,WriterVo vo) {
+		int result=0;
+		String query="insert into tbl_writer values(?,?,?,?)";
+		PreparedStatement pstmt=null;
+		boolean b=false;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,vo.getId());
+			pstmt.setString(2,vo.getPassword());
+			pstmt.setString(3,vo.getWriter());
+			pstmt.setString(4,vo.getEmailAddress());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
 		return result;
 	}
 }

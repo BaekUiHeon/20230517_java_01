@@ -36,6 +36,7 @@ public class ListServlet extends HttpServlet {
 		String PageNoStr=(String)request.getAttribute("PageNo");
 		int currentPage=1;
 		int pageSize=10;
+		int pageBlockSize=10;
 		try {
 			currentPage=Integer.parseInt(PageNoStr);
 		}
@@ -43,13 +44,47 @@ public class ListServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		BoardService bs=new BoardService();
+		if(searchWord==""||searchWord==null) {
+			Map<String,Object> map = bs.selectList(currentPage,pageSize);
+			List<boardVo> list=(List<boardVo>)map.get("list");
+			int totalCnt=(int)map.get("totalCnt");
+			int totalPageNum = totalCnt/pageSize + (totalCnt%pageSize == 0 ? 0 : 1);
+			int startPageNum = 1;
+			if((currentPage%pageBlockSize) == 0) {
+				startPageNum = ((currentPage/pageBlockSize)-1)*pageBlockSize +1;
+			} else {
+				startPageNum = ((currentPage/pageBlockSize))*pageBlockSize +1;
+			}
+			int endPageNum = (startPageNum+pageBlockSize > totalPageNum) ? totalPageNum : startPageNum+pageBlockSize-1;
+			request.setAttribute("totalPageNum", totalPageNum);
+			request.setAttribute("startPageNum", startPageNum);
+			request.setAttribute("endPageNum", endPageNum);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("list",list);
+			request.setAttribute("totalCnt",totalCnt);
+			request.getRequestDispatcher("/WEB-INF/view/content/list.jsp");
+		}
+		else {
 		Map<String,Object> map = bs.selectSearchList(currentPage,pageSize,searchWord);
 		List<boardVo> list=(List<boardVo>)map.get("list");
 		int totalCnt=(int)map.get("totalCnt");
+		int totalPageNum = totalCnt/pageSize + (totalCnt%pageSize == 0 ? 0 : 1);
+		int startPageNum = 1;
+		if((currentPage%pageBlockSize) == 0) {
+			startPageNum = ((currentPage/pageBlockSize)-1)*pageBlockSize +1;
+		} else {
+			startPageNum = ((currentPage/pageBlockSize))*pageBlockSize +1;
+		}
+		int endPageNum = (startPageNum+pageBlockSize > totalPageNum) ? totalPageNum : startPageNum+pageBlockSize-1;
+		request.setAttribute("totalPageNum", totalPageNum);
+		request.setAttribute("startPageNum", startPageNum);
+		request.setAttribute("endPageNum", endPageNum);
+		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("list",list);
 		request.setAttribute("searchWord", searchWord);
 		request.setAttribute("totalCnt",totalCnt);
 		request.getRequestDispatcher("/WEB-INF/view/content/list.jsp");
+		}
 	}
 }
 

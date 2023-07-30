@@ -95,6 +95,14 @@
 </head>
 <body>
     <body>
+   	<c:if test="${alert==1}">
+		<script>
+    	function showAlert() {
+        alert('회원가입 성공');
+    	}
+    	showAlert();
+		</script>
+		</c:if>
         <div class="title">
             <p>커뮤니티 사이트</p>
         </div>
@@ -110,7 +118,7 @@
                     </tr>
                     <tr>
                         <th>비밀번호</th>
-                        <td><input type="text" name="password" required></td>
+                        <td><input type="password" name="password" required></td>
                     </tr>
                 </table>
                 <button type="submit">확인</button>

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
+import board.model.vo.WriterVo;
+
 /**
  * Servlet implementation class SignupServlet
  */
@@ -26,15 +29,47 @@ public class SignupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp");
-	}
+		
+			request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
+			}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String password1=request.getParameter("password1");
+		String password2=request.getParameter("password2");
+		System.out.println(password1);
+		System.out.println(password2);
+		
+		if(!password1.equals(password2)) {
+			request.setAttribute("alert",1);
+			System.out.println("alert1");
+			request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
+			}
+		else{
+			BoardService bs = new BoardService();
+			WriterVo vo= new WriterVo
+									(request.getParameter("id"), 
+									request.getParameter("password1"),
+									request.getParameter("writer"),
+									request.getParameter("emailAddress")
+									);
+			System.out.println(vo);
+			int result = bs.signup(vo);
+			if(result==1) {
+				System.out.println("회원가입 성공");
+				request.setAttribute("alert",1);
+				request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
+			}
+			else {
+				System.out.println("회원가입 실패");
+				request.setAttribute("alert",2);
+				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
+			}
+		}
 	}
-
 }

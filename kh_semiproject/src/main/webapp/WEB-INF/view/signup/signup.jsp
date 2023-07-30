@@ -92,6 +92,24 @@
     </style>
 </head>
 <body>
+	<c:if test="${alert==1}"> <%// 회원가입 실패에 따른 출력문들 %>
+	<script>
+    function showAlert() {
+        alert('비밀번호가 다릅니다');
+    }
+    showAlert();
+	</script>
+	</c:if>
+	<c:if test="${alert==2}">
+	<script>
+    function showAlert() {
+        alert('회원가입 실패');
+    }
+    showAlert();
+	</script>
+	</c:if>
+	
+	
     <div class="title">
         <p>커뮤니티 사이트</p>
     </div>
@@ -99,33 +117,33 @@
     <div class="PassInfo"><p>10자이상 대소문자,숫자포함</p></div>
     <div class="signup">
         <h2>회원가입</h2>
-        <form action="#" method="post"> <!--주소 입력해주어야함-->
+        <form action="${request.getContextPath()}/semi/signup" method="post"> <!--주소 입력해주어야함-->
             <table>
                 <tr>
                     <th>아이디</th>    
-                    <td><input type="text" name="ID" pattern="[A-Za-z0-9]+" required></td>  
+                    <td><input type="text"  name="id" pattern="[A-Za-z0-9]+" required></td>  
                 </tr>
                 <tr>
                     <th>비밀번호</th>
-                    <td><input type="text" name="PASSWORD" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
+                    <td><input type="password"  name="password1" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
                 </tr>
                 <tr>
                     <th>비밀번호확인</th>
-                    <td><input type="text" name="PASSWORD2" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
+                    <td><input type="password"  name="password2" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
                 </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" name="WRITER"></td>
+                    <td><input type="text"  name="writer"></td>
                 </tr>
                 <tr>
                     <th>이메일</th>
-                    <td><input type="text" name="EMAIL" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
+                    <td><input type="text"  name="emailAddress" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
                 </tr>
             </table>
             <button type="submit">확인</button>
         </form>
     </div>
-    <div><a href="${request.getContextPath()}/login">로그인</a></div> <!--입력해주어야함-->
+    <div><a href="${request.getContextPath()}/semi/login">로그인</a></div>
     <div class="footer">
         <p>copyright (c) 백의헌 게시판만들기</p>
     </div>
