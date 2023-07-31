@@ -44,9 +44,6 @@ c:if는 true false 조건만 가능함 - else 없음.
 	${cnt.index}, ${cnt.count }, ${vo.bwriteDate }<br>
 </c:forEach>
 
-
-
-
 <hr>
 <hr>
 ${vo.studentSsn }

@@ -33,6 +33,7 @@ public class StudentListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/student/list doGet() 진입");
 		String searchWord = request.getParameter("searchWord");
+		String pageNoStr = request.getParameter("pageNoStr");
 		int currentPage = 1; 
 		int pageSize = 10;  
 		if(pageNoStr != null) {

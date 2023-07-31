@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html>s
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -56,17 +56,17 @@
     }
     .IdInfo{
         position:fixed;
-        left: 700px;
-        top: 190px;
+        left: 670px;
+        top: 210px;
     }
     .PassInfo{
         position:fixed;
-        left: 700px;
-        top: 230px;
+        left: 670px;
+        top: 250px;
     }
     button{
         position: absolute;
-        bottom: 200px;
+        bottom: 220px;
         left: 306px;
         font-weight: bold;
         font-size: 20px;
