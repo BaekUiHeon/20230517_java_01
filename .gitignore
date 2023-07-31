@@ -3,7 +3,8 @@
 <<<<<<< HEAD
 bin/
 .metadata/
-
+properties/
+*.properties
 Servers/
 build/
 =======

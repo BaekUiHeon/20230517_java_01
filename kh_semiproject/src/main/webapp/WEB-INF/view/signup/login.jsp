@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>s
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
@@ -79,8 +79,8 @@
     }
     a{
         position: absolute;
-        bottom: 270px;
-        right: 365px;
+        bottom: 290px;
+        right: 365px;	
         width: 110px;
         height: 40px;
         text-align: center;
@@ -95,14 +95,14 @@
 </head>
 <body>
     <body>
-   	<c:if test="${alert==1}">
+   	<c:if test="${success==1}">
 		<script>
     	function showAlert() {
-        alert('회원가입 성공');
+        alert('로그인 실패');
     	}
     	showAlert();
 		</script>
-		</c:if>
+	</c:if>
         <div class="title">
             <p>커뮤니티 사이트</p>
         </div>

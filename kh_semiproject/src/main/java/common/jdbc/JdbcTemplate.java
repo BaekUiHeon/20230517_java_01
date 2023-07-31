@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 public class JdbcTemplate {
 	private static Connection conn=null;
 	
 	public static Connection getConnection() {
+		Properties prop = new Properties();
+		String currentPath = JdbcTemplate.class.getResource("./").getPath(); //무슨코드냐?
+		System.out.println("currentPath:"+currentPath);
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("드라이버 확인");
