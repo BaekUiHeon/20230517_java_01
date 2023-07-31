@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>�Խñ۸��</title>
+<title>게시글목록</title>
     <style>
     body{
         position: relative;
@@ -93,49 +92,49 @@
 <body>
     <body>
         <div class="title">
-            <p>Ŀ�´�Ƽ ����Ʈ</p>
+            <p>커뮤니티 사이트</p>
         </div>
         <div class="content">
-        	<a href="#" class="like">���ƿ� ${count}</a>
-            <p>����:${subject}</p>
+        	<a href="#" class="like">좋아요 ${count}</a>
+            <p>제목:${subject}</p>
             <div>
-                <p>�ۼ���:${writer}</p>
-                <p>�ۼ���:${wDATE}</p>
+                <p>작성자:${writer}</p>
+                <p>작성일:${wDATE}</p>
             </div>
             <div class=content1>
-                <p>����:${content}</p>
+                <p>내용:${content}</p>
             </div>
             <div>
-                <p>��� ��ȸ</p>
+                <p>댓글 조회</p>
             </div>
             <table>
             <c:forEach items=${commentList var="item" }>
                 <tr>
                     <td>${item.writer }: ${item.content }</td>
                     <c:if test="${writer==item.writer}">
-                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">����</a></td>
+                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td>
                     </c:if>
                 </tr>
                 </c:forEach>
             </table>
         </div>
         <div class="comment">
-            <p>����ۼ�</p>
+            <p>댓글작성</p>
             <form action="${request.getContextPath()}/semi/board" method="get"> 
             	<input type="hidden" name="id" value="${id}">
                 <input type="text" name="comment">
-                <input type="submit" value="�ۼ��Ϸ�">
+                <input type="submit" value="작성완료">
             </form>
         </div>
         <nav>
-            <a href="${request.getContextPath()}/semi/list?id=id">���</a> 
+            <a href="${request.getContextPath()}/semi/list?id=id">목록</a> 
             <c:if test="">
-            <a href="${request.getContextPath()}/semi/write?content=content&subject=subject&id=${id}">����</a> 
+            <a href="${request.getContextPath()}/semi/write?content=content&subject=subject&id=${id}">수정</a> 
             </c:if>
-            <a href="${request.getContextPath()}/semi/write?id=id">�ۼ�</a>
+            <a href="${request.getContextPath()}/semi/write?id=id">작성</a>
         </nav>
         <div class="footer">
-            <p>copyright (c) ������ �Խ��Ǹ����</p>
+            <p>copyright (c) 백의헌 게시판만들기</p>
         </div>
 </body>
 </html>

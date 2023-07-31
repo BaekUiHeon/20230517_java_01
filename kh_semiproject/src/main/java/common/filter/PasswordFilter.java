@@ -20,5 +20,4 @@ public class PasswordFilter implements Filter {
 		PasswordWrapper pwrapper= new PasswordWrapper(httpRequest);
 		chain.doFilter(pwrapper, response);
 	}
-	
 }

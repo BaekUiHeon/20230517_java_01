@@ -15,11 +15,10 @@ public class BoardService {
 	
 	private static Connection conn=null;
 	
-	public int login(String id,String password) {
-		int result=0;
+	public String login(String id,String password) {
 		conn=getConnection();
 		BoardDao dao=new BoardDao();
-		result=(dao.login(conn,id,password));
+		String result=(dao.login(conn,id,password));
 		close(conn);
 		return result;
 	}

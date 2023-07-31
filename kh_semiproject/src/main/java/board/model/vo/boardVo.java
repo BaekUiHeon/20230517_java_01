@@ -11,8 +11,27 @@ public class boardVo {
     private String content;
     private String wdate;
     private String id;
+    private String writer;
     
     
+	public boardVo(String idx, String subject, String content, String wdate, String id, String writer) {
+		super();
+		this.idx = idx;
+		this.subject = subject;
+		this.content = content;
+		this.wdate = wdate;
+		this.id = id;
+		this.writer = writer;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
 	public boardVo(String idx, String subject, String content, String wdate, String id) {
 		super();
 		this.idx = idx;

@@ -24,7 +24,6 @@ public class SignupServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -32,14 +31,11 @@ public class SignupServlet extends HttpServlet {
 		
 			request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		String password1=request.getParameter("password1");
 		String password2=request.getParameter("password2");
 		System.out.println(password1);
@@ -54,8 +50,8 @@ public class SignupServlet extends HttpServlet {
 			BoardService bs = new BoardService();
 			WriterVo vo= new WriterVo
 									(request.getParameter("id"), 
-									request.getParameter("password1"),
 									request.getParameter("writer"),
+									request.getParameter("password1"),
 									request.getParameter("emailAddress")
 									);
 			System.out.println(vo);
@@ -67,7 +63,7 @@ public class SignupServlet extends HttpServlet {
 			}
 			else {
 				System.out.println("회원가입 실패");
-				request.setAttribute("alert",2);
+				request.setAttribute("alert",1);
 				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
 		}

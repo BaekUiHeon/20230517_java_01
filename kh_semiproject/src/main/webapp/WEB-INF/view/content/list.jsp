@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-    <title>°Ô½Ã¹° ¸ñ·Ï</title>
+    <title>ê²Œì‹œë¬¼ ëª©ë¡</title>
     <style>
     body{
         position: relative;
@@ -81,7 +80,11 @@
         text-align: center;
         line-height: 40px;
         background-color: gray;
-        font-weight: bold;
+        font-weight: bold;   
+    }
+    .write a{
+    	 color: black;
+    	 text-decoration: none;
     }
     td{
     font-size: 20px; 
@@ -98,31 +101,31 @@
 </style>
 </head>
 <body>
-		<c:if test="${success=1}">
+		<c:if test="${success==1}">
 		<script>
     	function showAlert() {
-        alert('·Î±×ÀÎ¼º°ø');
+        alert('ë¡œê·¸ì¸ì„±ê³µ');
     	}
     	showAlert();
 		</script>
 		</c:if>
         <div class="title">
-            <p>Ä¿¹Â´ÏÆ¼ »çÀÌÆ®</p>
+            <p>ì»¤ë®¤ë‹ˆí‹° ì‚¬ì´íŠ¸</p>
         </div>
         <div class="list">
-        <div class="notice"><p>ÃÑ °³ÀÇ °Ô½Ã¹°ÀÌ ÀÖ½À´Ï´Ù</p></div>
+        <div class="notice"><p>ì´ ê°œì˜ ê²Œì‹œë¬¼ì´ ìˆìŠµë‹ˆë‹¤</p></div>
         <span class="search">
-            <form action ="${request.getContextPath()}/board/list" method="get">
+            <form action ="${request.getContextPath()}/semi/list" method="get">
                 <input type="search" name="searchWord">
-                <input type="submit" value="Ã£±â">
+                <input type="submit" value="ì°¾ê¸°">
             </form>
         </span>
             <table>
                 <tr>
-                	<th class="col1">¹øÈ£</th>
-                    <th class="col2">ÀÛ¼ºÀÚ</th>
-                    <th class="col3">Á¦¸ñ</th>
-                    <th class="col4">ÀÛ¼ºÀÏ</th>   
+                	<th class="col1">ë²ˆí˜¸</th>
+                    <th class="col2">ì‘ì„±ì</th>
+                    <th class="col3">ì œëª©</th>
+                    <th class="col4">ì‘ì„±ì¼</th>   
                 </tr>
                 <c:forEach items="${list}" var="item">
                 <tr> 
@@ -132,12 +135,11 @@
                     <td>${item.wdate}</td>   
                 </tr>
                 </c:forEach>
-                %>
             </table>
-            <div class="write"><a href="${request.getContextPath()}/semi/write?id=id">ÀÛ¼º</a></div>
+            <div class="write"><a href="${request.getContextPath()}/semi/write?id=id">ì‘ì„±</a></div>
         </div>
         <div class="footer">
-            <p>copyright (c) ¹éÀÇÇå °Ô½ÃÆÇ¸¸µé±â</p>
+            <p>copyright (c) ë°±ì˜í—Œ ê²Œì‹œíŒë§Œë“¤ê¸°</p>
         </div>
 </body>
 </html>

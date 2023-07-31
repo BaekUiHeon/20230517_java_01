@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
- <title>����ȭ��</title>
+ <title>메인화면</title>
     <style>
     body{
         position: relative;
@@ -66,16 +65,16 @@
 </head>
 <body>
     <div class="title">
-        <p>Ŀ�´�Ƽ ����Ʈ</p>
+        <p>커뮤니티 사이트</p>
     </div>
     <div class="login">
-        <a href="${request.getContextPath()}/semi/login">�α���</a>
+        <a href="${request.getContextPath()}/semi/login">로그인</a>
     </div>
     <div class="signup">
-        <a href="${request.getContextPath()}/semi/signup">ȸ������</a>
+        <a href="${request.getContextPath()}/semi/signup">회원가입</a>
     </div>
     <div class="footer">
-        <p>copyright (c) ������ �Խ��Ǹ����</p>
+        <p>copyright (c) 백의헌 게시판만들기</p>
     </div>
 </body>
 </html>

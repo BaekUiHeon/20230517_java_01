@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>�α���</title>
+<title>로그인</title>
     <style>
         body{
             position: relative;
@@ -95,38 +94,54 @@
 </head>
 <body>
     <body>
-   	<c:if test="${success==1}">
+	 <c:if test="${alert==1}">
 		<script>
     	function showAlert() {
-        alert('�α��� ����');
+        alert('회원가입성공 로그인하세요.');
+    	}
+    	showAlert();
+		</script>
+	</c:if>
+   	<c:if test="${success==0}">
+		<script>
+    	function showAlert() {
+        alert('아이디가 존재하지 않습니다.');
+    	}
+    	showAlert();
+		</script>
+	</c:if>
+	<c:if test="${success==1}">
+		<script>
+    	function showAlert() {
+        alert('비밀번호가 틀렸습니다.');
     	}
     	showAlert();
 		</script>
 	</c:if>
         <div class="title">
-            <p>Ŀ�´�Ƽ ����Ʈ</p>
+            <p>커뮤니티 사이트</p>
         </div>
-        <div class="IdInfo"><p>����,���ڸ� ����</p></div>
-        <div class="PassInfo"><p>10���̻� ��ҹ���,��������</p></div>
+        <div class="IdInfo"><p>영어,숫자만 가능</p></div>
+        <div class="PassInfo"><p>10자이상 대소문자,숫자포함</p></div>
         <div class="login">
-            <h2>�α���</h2>
+            <h2>로그인</h2>
             <form action="${request.getContextPath()}/semi/login" method="post">  
                 <table>
                     <tr>
-                        <th>���̵�</th>    
+                        <th>아이디</th>    
                         <td><input type="text" name="id" required></td>  
                     </tr>
                     <tr>
-                        <th>��й�ȣ</th>
+                        <th>비밀번호</th>
                         <td><input type="password" name="password" required></td>
                     </tr>
                 </table>
-                <button type="submit">Ȯ��</button>
+                <button type="submit">확인</button>
             </form>
-            <a href="${request.getContextPath()}/semi/signup">ȸ������</a> 
+            <a href="${request.getContextPath()}/semi/signup">회원가입</a> 
         </div>
         <div class="footer">
-            <p>copyright (c) ������ �Խ��Ǹ����</p>
+            <p>copyright (c) 백의헌 게시판만들기</p>
         </div>
 </body>
 </html>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>	
 <head>
 <meta charset="EUC-KR">
-<title>È¸¿ø°¡ÀÔ</title>
+<title>íšŒì›ê°€ìž…</title>
     <style>
       body{
         position: relative;
@@ -92,18 +92,18 @@
     </style>
 </head>
 <body>
-	<c:if test="${alert==1}"> <%// È¸¿ø°¡ÀÔ ½ÇÆÐ¿¡ µû¸¥ Ãâ·Â¹®µé %>
+	<c:if test="${alert==1}"> <%// íšŒì›ê°€ìž… ì‹¤íŒ¨ì— ë”°ë¥¸ ì¶œë ¥ë¬¸ë“¤ %>
 	<script>
     function showAlert() {
-        alert('ºñ¹Ð¹øÈ£°¡ ´Ù¸¨´Ï´Ù');
+        alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤');
     }
     showAlert();
 	</script>
 	</c:if>
-	<c:if test="${alert==2}">
+	<c:if test="${alert==1}">
 	<script>
     function showAlert() {
-        alert('È¸¿ø°¡ÀÔ ½ÇÆÐ');
+        alert('íšŒì›ê°€ìž… ì‹¤íŒ¨');
     }
     showAlert();
 	</script>
@@ -111,41 +111,41 @@
 	
 	
     <div class="title">
-        <p>Ä¿¹Â´ÏÆ¼ »çÀÌÆ®</p>
+        <p>ì»¤ë®¤ë‹ˆí‹° ì‚¬ì´íŠ¸</p>
     </div>
-    <div class="IdInfo"><p>¿µ¾î,¼ýÀÚ¸¸ °¡´É</p></div>
-    <div class="PassInfo"><p>10ÀÚÀÌ»ó ´ë¼Ò¹®ÀÚ,¼ýÀÚÆ÷ÇÔ</p></div>
+    <div class="IdInfo"><p>ì˜ì–´,ìˆ«ìžë§Œ ê°€ëŠ¥</p></div>
+    <div class="PassInfo"><p>10ìžì´ìƒ ëŒ€ì†Œë¬¸ìž,ìˆ«ìží¬í•¨</p></div>
     <div class="signup">
-        <h2>È¸¿ø°¡ÀÔ</h2>
-        <form action="${request.getContextPath()}/semi/signup" method="post"> <!--ÁÖ¼Ò ÀÔ·ÂÇØÁÖ¾î¾ßÇÔ-->
+        <h2>íšŒì›ê°€ìž…</h2>
+        <form action="${request.getContextPath()}/semi/signup" method="post"> <!--ì£¼ì†Œ ìž…ë ¥í•´ì£¼ì–´ì•¼í•¨-->
             <table>
                 <tr>
-                    <th>¾ÆÀÌµð</th>    
+                    <th>ì•„ì´ë””</th>    
                     <td><input type="text"  name="id" pattern="[A-Za-z0-9]+" required></td>  
                 </tr>
                 <tr>
-                    <th>ºñ¹Ð¹øÈ£</th>
+                    <th>ë¹„ë°€ë²ˆí˜¸</th>
                     <td><input type="password"  name="password1" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
                 </tr>
                 <tr>
-                    <th>ºñ¹Ð¹øÈ£È®ÀÎ</th>
+                    <th>ë¹„ë°€ë²ˆí˜¸í™•ì¸</th>
                     <td><input type="password"  name="password2" pattern="^(?=.*[a-z])(?=.*[A-Z]).{10,}$" required></td>
                 </tr>
                 <tr>
-                    <th>´Ð³×ÀÓ</th>
+                    <th>ë‹‰ë„¤ìž„</th>
                     <td><input type="text"  name="writer"></td>
                 </tr>
                 <tr>
-                    <th>ÀÌ¸ÞÀÏ</th>
+                    <th>ì´ë©”ì¼</th>
                     <td><input type="text"  name="emailAddress" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
                 </tr>
             </table>
-            <button type="submit">È®ÀÎ</button>
+            <button type="submit">í™•ì¸</button>
         </form>
     </div>
-    <div><a href="${request.getContextPath()}/semi/login">·Î±×ÀÎ</a></div>
+    <div><a href="${request.getContextPath()}/semi/login">ë¡œê·¸ì¸</a></div>
     <div class="footer">
-        <p>copyright (c) ¹éÀÇÇå °Ô½ÃÆÇ¸¸µé±â</p>
+        <p>copyright (c) ë°±ì˜í—Œ ê²Œì‹œíŒë§Œë“¤ê¸°</p>
     </div>
 </body>
 </html>
