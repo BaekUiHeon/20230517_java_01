@@ -52,12 +52,12 @@
         width: 494px;
     }
     textarea{
-        height: 298px;
+        height: 270px;
         width: 494px
     }
     input[type=submit]{
         position: relative;
-        top: 30px;
+        top: 13px;
         left: 720px;
         background-color: gray;
         border: none;
@@ -85,24 +85,29 @@
         color: black;
         text-decoration: none;
     }
+    .title2{
+        position: relative;
+        left: 350px;
+    }
     </style>
 </head>
 <body>
     <div class="title">
         <p>커뮤니티 사이트</p>
     </div>
-    <form action="${request.getContextPath()}/semi/write" method="get">
+    <form action="${request.getContextPath()}/semi/write.do" method="get">
+    	<td class="title2">게시물 작성</td>
         <table>
             <tr>
                 <td class="col1">제목</td>
-                <td class="cols2"><input type="text" name="title" <c:if test="${subject!=null}">value="${subject}"</c:if>></td>
+                <td class="cols2"><input type="text" name="subject" <c:if test="${subject!=null}">value="${subject}"</c:if>></td>
             </tr>
             <tr>
                 <td class="col1">내용</td>
-                <td class="cols2"><textarea <c:if test="${content!=null}">value="${content}"</c:if>></textarea></td>
+                <td class="cols2"><textarea name=content <c:if test="${content!=null}">value="${content}"</c:if>></textarea></td>
             </tr>
         </table>
-        <input type="hidden" name="idx" value="${idx}"> <%//idx값이 존재한다면... 다음행동을 writecontroller에서 작성해야함 %>
+        <input type="hidden" name="idx" value="${idx}"> <%//idx값이 존재한다면... 수정함수를 호출하도록 writecontroller에서 작성해야함 %>
         <input type="submit" value="완료">
     </form>
     <div>

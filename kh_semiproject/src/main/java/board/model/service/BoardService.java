@@ -15,6 +15,27 @@ public class BoardService {
 	
 	private static Connection conn=null;
 	
+	public int rewrite(String idx,String subject,String content) {
+		int result =0;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.rewrite(conn,idx,subject,content);
+		if(result==0) {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int write(String id,String subject,String content) {
+		int result =0;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.write(conn,id,subject,content);
+		close(conn);
+		return result;
+	}
+	
 	public String login(String id,String password) {
 		conn=getConnection();
 		BoardDao dao=new BoardDao();

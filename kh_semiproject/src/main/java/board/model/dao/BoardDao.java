@@ -13,6 +13,58 @@ import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 public class BoardDao {
+	public int write(Connection conn,String id,String subject,String content) {
+		int result=0;
+		String query="insert into tbl_board (id,subject,content) values(?,?,?)";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			result=pstmt.executeUpdate();
+			System.out.println("데이터베이스 게시물 insert완료");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int rewrite(Connection conn,String idx,String subject,String content) {
+		int result=0;
+		String query="update tbl_board set content=? where idx=?";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,content);
+			pstmt.setString(2,idx);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		if(result==1) {
+			query="update tbl_board set subject=? where idx=?";
+			try {
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1,subject);
+				pstmt.setString(2,idx);
+				result=pstmt.executeUpdate();
+				System.out.println("데이터베이스 게시물 수정완료");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				close(pstmt);
+			}
+		}
+		return result;
+	}
 	public String login(Connection conn,String id,String password) {
 		String result=null;
 		PreparedStatement pstmt=null;
