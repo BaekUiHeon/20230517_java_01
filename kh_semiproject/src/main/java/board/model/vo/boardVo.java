@@ -11,7 +11,7 @@ public class boardVo {
     private String content;
     private String wdate;
     private String id;
-    private String writer;
+    private String writer; //테이블에는 존재하지 않는 컬럼이나 join이 사용되는 함수에서 쓰기위해 추가함.
     
     
 	public boardVo(String idx, String subject, String content, String wdate, String id, String writer) {

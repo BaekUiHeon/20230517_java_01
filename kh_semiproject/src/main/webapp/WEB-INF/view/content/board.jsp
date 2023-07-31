@@ -95,7 +95,8 @@
             <p>커뮤니티 사이트</p>
         </div>
         <div class="content">
-        	<a href="#" class="like">좋아요 ${count}</a>
+        <%//게시글번호(idx),(접속계정)id받아와야함 %>
+        	<a href="${request.getContextPath()}/list.board?idx=${idx}&id=${id}" class="like">좋아요 ${count}</a> 
             <p>제목:${subject}</p>
             <div>
                 <p>작성자:${writer}</p>
@@ -111,7 +112,7 @@
             <c:forEach items=${commentList var="item" }>
                 <tr>
                     <td>${item.writer }: ${item.content }</td>
-                    <c:if test="${writer==item.writer}">
+                    <c:if test="${writer==item.writer}"><%//writer 동일하다면 나오게 코드구현해야함%>
                     <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td>
                     </c:if>
                 </tr>
@@ -121,15 +122,15 @@
         <div class="comment">
             <p>댓글작성</p>
             <form action="${request.getContextPath()}/semi/board" method="get"> 
-            	<input type="hidden" name="id" value="${id}">
+            	<input type="hidden" name="id" value="${id}"> <%//접속된 계정정보를 가지고 가져가는 부분 추가구현필요  %>
                 <input type="text" name="comment">
                 <input type="submit" value="작성완료">
             </form>
         </div>
         <nav>
             <a href="${request.getContextPath()}/semi/list?id=id">목록</a> 
-            <c:if test="">
-            <a href="${request.getContextPath()}/semi/write?content=content&subject=subject&id=${id}">수정</a> 
+            <c:if test="${1==1}"> <%//접속 계정에따른 조건문추가해야함 %>
+            <a href="${request.getContextPath()}/semi/write?content=${content}&subject=${subject}&id=${id}">수정</a> 
             </c:if>
             <a href="${request.getContextPath()}/semi/write?id=id">작성</a>
         </nav>

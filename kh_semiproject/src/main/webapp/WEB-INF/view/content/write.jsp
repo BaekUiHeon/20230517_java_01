@@ -100,11 +100,11 @@
         <table>
             <tr>
                 <td class="col1">제목</td>
-                <td class="cols2"><input type="text" name="subject" <c:if test="${subject!=null}">value="${subject}"</c:if>></td>
+                <td class="cols2"><input type="text" name="subject" <c:if test="${subject!=null}">value="${subject}"</c:if> required></td>
             </tr>
             <tr>
                 <td class="col1">내용</td>
-                <td class="cols2"><textarea name=content <c:if test="${content!=null}">value="${content}"</c:if>></textarea></td>
+                <td class="cols2"><textarea name=content  <c:if test="${content!=null}">value="${content}"</c:if> required></textarea></td>
             </tr>
         </table>
         <input type="hidden" name="idx" value="${idx}"> <%//idx값이 존재한다면... 수정함수를 호출하도록 writecontroller에서 작성해야함 %>
