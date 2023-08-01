@@ -32,19 +32,20 @@ public class ListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("mid")!=null) { // 비로그인 상태에서만 접속가능한 웹페이지
 		String searchWord=(String)request.getAttribute("searchWord");
 		String PageNoStr=(String)request.getAttribute("PageNo");
 		int currentPage=1;
 		int pageSize=10;
 		int pageBlockSize=10;
 		try {
-			currentPage=Integer.parseInt(PageNoStr);
+			System.out.println("현재 페이지가 없으므로 currentPage =1 대입");
 		}
 		catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
 		BoardService bs=new BoardService();
-		if(searchWord==""||searchWord==null) {
+		if(searchWord==null) {
 			Map<String,Object> map = bs.selectList(currentPage,pageSize);
 			List<boardVo> list=(List<boardVo>)map.get("list");
 			int totalCnt=(int)map.get("totalCnt");
@@ -62,7 +63,7 @@ public class ListServlet extends HttpServlet {
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("list",list);
 			request.setAttribute("totalCnt",totalCnt);
-			request.getRequestDispatcher("/WEB-INF/view/content/list.jsp");
+			request.getRequestDispatcher("/WEB-INF/view/content/list.jsp").forward(request, response);
 		}
 		else {
 		Map<String,Object> map = bs.selectSearchList(currentPage,pageSize,searchWord);
@@ -83,7 +84,12 @@ public class ListServlet extends HttpServlet {
 		request.setAttribute("list",list);
 		request.setAttribute("searchWord", searchWord);
 		request.setAttribute("totalCnt",totalCnt);
-		request.getRequestDispatcher("/WEB-INF/view/content/list.jsp");
+		request.getRequestDispatcher("/WEB-INF/view/content/list.jsp").forward(request, response);
+		}
+		}
+		else{
+			System.out.println("비로그인 상태로 로그인이 필요한 사이트에 접속함");
+			response.sendRedirect(request.getContextPath()+"/semi/main");
 		}
 	}
 }

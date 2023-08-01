@@ -67,13 +67,17 @@ public class StudentDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			// pstmt 생성된 후  ---- execute실행하기 전
+			// 여기서 ? 위치홀더에 값넣기
 			pstmt.setString(1, studentNo);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = new StudentVo();
+				// while 동작시킬필요없음. query 결과가 단일행일 것이므로
 				result.setAbsenceYn(rset.getString("Absence_Yn"));
 				result.setCoachProfessorNo(rset.getString("Coach_Professor_No"));
 				result.setDepartmentNo(rset.getString("Department_No"));
+//				result.setEntranceDate(rset.getDate("Entrance_Date"));
 				result.setEntranceDate(rset.getString("Entrance_Date"));
 				result.setStudentAddress(rset.getString("Student_Address"));
 				result.setStudentName(rset.getString("student_Name"));
@@ -349,6 +353,7 @@ public class StudentDao {
 				vo.setStudentAddress( rs.getString("Student_Address"));
 //				vo.setEntranceDate( rs.getDate("Entrance_Date") );
 				vo.setEntranceDate( rs.getString("Entrance_Date") );
+				
 				result.add(vo);
 			}
 		} catch (SQLException e) {
@@ -357,6 +362,10 @@ public class StudentDao {
 			close(rs);
 			close(pstmt);
 		}
+
+		//  확인용 System.out.println(result);
 		return result;
 	}
+	
+	
 }

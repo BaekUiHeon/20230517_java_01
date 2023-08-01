@@ -26,9 +26,13 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/main/main.jsp").forward(request, response);
+		if(request.getSession().getAttribute("mid")==null) {
+		request.getRequestDispatcher("/WEB-INF/view/main/main.jsp").forward(request, response); // 비로그인 상태에서만 접속가능한 웹페이지
+		}
+		else {
+			response.sendRedirect(request.getContextPath()+"/semi/list"); //로그인상태라면 게시목록으로 바로보냄. 
+		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -36,5 +40,4 @@ public class MainServlet extends HttpServlet {
 //		// TODO Auto-generated method stub
 //		doGet(request, response);
 //	}
-
 }

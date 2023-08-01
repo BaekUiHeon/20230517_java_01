@@ -28,9 +28,13 @@ public class SignupServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			if(request.getSession().getAttribute("mid")==null) { // 비로그인 상태에서만 접속가능한 웹페이지
 			request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
+			else {
+				response.sendRedirect(request.getContextPath()+"/list"); //로그인상태라면 게시목록으로 바로보냄. 
+			}
+	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,12 +61,12 @@ public class SignupServlet extends HttpServlet {
 			int result = bs.signup(vo);
 			if(result==1) {
 				System.out.println("회원가입 성공");
-				request.setAttribute("signupSuccessfail",1);
+				request.setAttribute("signupSuccessFail",1); //response에 담고 redirect해야할 피룡성 있음.
 				request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
 			}
 			else {
 				System.out.println("회원가입 실패");
-				request.setAttribute("signupSuccessfail",1);
+				request.setAttribute("signupSuccessFail",1);
 				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
 		}

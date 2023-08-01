@@ -31,7 +31,12 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("mid")==null) { // 비로그인 상태에서만 접속가능한 웹페이지
 		request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
+		}
+		else {
+			response.sendRedirect(request.getContextPath()+"/list"); //로그인상태라면 게시목록으로 바로보냄. 
+		}
 	}
 
 	/**
@@ -40,15 +45,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardService bs=new BoardService();
 		System.out.println("로그인 시도시작");
-		int currentPage=1;
-		int pageSize=10;
 		String id=request.getParameter("id");
-		String result = bs.login(request.getParameter("id"),request.getParameter("password"));
+		String password=request.getParameter("password");
+		String result = bs.login(id,password);
 		if(result!=null) { 
-			if(request.getParameter("password").equals(result)) {
+			if(password.equals(result)) {
 				System.out.println("로그인 성공");
 				request.getSession().setAttribute("mid", id);
-				response.sendRedirect(request.getContextPath()+"/semi/list");
+				response.sendRedirect(request.getContextPath()+"/list");
 			}
 			else {
 				System.out.println("비밀번호가 틀렸습니다");

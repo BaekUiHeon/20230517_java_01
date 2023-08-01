@@ -96,11 +96,11 @@
         </div>
         <div class="content">
         <%//게시글번호(idx),(접속계정)id받아와야함 %>
-        	<a href="${request.getContextPath()}/list.board?idx=${idx}&id=${id}" class="like">좋아요 ${count}</a> 
+        	<a href="${request.getContextPath()}/list.board?like=1" class="like">좋아요 ${count}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
             <p>제목:${subject}</p>
             <div>
                 <p>작성자:${writer}</p>
-                <p>작성일:${wDATE}</p>
+                <p>작성일:${wdate}</p>
             </div>
             <div class=content1>
                 <p>내용:${content}</p>
@@ -112,8 +112,8 @@
             <c:forEach items=${commentList var="item" }>
                 <tr>
                     <td>${item.writer }: ${item.content }</td>
-                    <c:if test="${writer==item.writer}"><%//writer 동일하다면 나오게 코드구현해야함%>
-                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td>
+                    <c:if test="${mid==item.id}"><%//writer 동일하다면 나오게 코드구현해야함%>
+                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td> 
                     </c:if>
                 </tr>
                 </c:forEach>
@@ -121,18 +121,17 @@
         </div>
         <div class="comment">
             <p>댓글작성</p>
-            <form action="${request.getContextPath()}/semi/board" method="get"> 
-            	<input type="hidden" name="id" value="${id}"> <%//접속된 계정정보를 가지고 가져가는 부분 추가구현필요  %>
+            <form action="${request.getContextPath()}/semi/board" method="get"> <%--댓글작성에 대한 함수필요--%>
                 <input type="text" name="comment">
                 <input type="submit" value="작성완료">
             </form>
         </div>
         <nav>
-            <a href="${request.getContextPath()}/semi/list?id=id">목록</a> 
-            <c:if test="${1==1}"> <%//접속 계정에따른 조건문추가해야함 %>
-            <a href="${request.getContextPath()}/semi/write?content=${content}&subject=${subject}&id=${id}">수정</a> 
+            <a href="${request.getContextPath()}/semi/list">목록</a> 
+            <c:if test="${mid==id}"> <%--접속 계정에따른 조건문--%>
+            <a href="${request.getContextPath()}/semi/write?idx=${idx}&content=${content}&subject=${subject}">수정</a> <%--idx값 입력있어야함--%>
             </c:if>
-            <a href="${request.getContextPath()}/semi/write?id=id">작성</a>
+            <a href="${request.getContextPath()}/semi/write">작성</a>
         </nav>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>

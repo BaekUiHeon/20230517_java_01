@@ -29,16 +29,21 @@ public class WriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("게시물작성 서블릿 doget접속.");
+		if(request.getSession().getAttribute("mid")!=null) {
 		String subject = request.getParameter("subject");
-		
-		if(subject!=null) { //제목이 있다는것은 수정이라는 뜻이니    제목,내용,게시글번호를 가지고 write.jsp를 열어라 (계정작업필요)
+		if(subject!=null) { //제목이 있다는것은 수정이라는 뜻이니 제목,내용,게시글번호를 가지고 write.jsp를 열어라
 			request.setAttribute("subject", subject);
 			request.setAttribute("content", request.getParameter("content"));
 			request.setAttribute("idx",request.getParameter("idx"));
 			request.getRequestDispatcher("/WEB-INF/view/content/write.jsp").forward(request, response);
 		}
-		else { // 아니라면 수정이 아니라 새로운 작성이므로 그냥 연다. (계정작업필요)
+		else { 
 			request.getRequestDispatcher("/WEB-INF/view/content/write.jsp").forward(request, response);
+		}
+		}
+		else{
+			System.out.println("비로그인 상태로 로그인이 필요한 사이트에 접속함");
+			response.sendRedirect(request.getContextPath()+"/semi/main");
 		}
 	}
 	/**

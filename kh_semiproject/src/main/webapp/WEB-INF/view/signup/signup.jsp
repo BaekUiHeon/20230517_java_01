@@ -94,17 +94,16 @@
     </style>
 </head>
 <body>
-	<c:if test="${passworderror==1}"> <%// 회원가입 실패에 따른 출력문들 %>
+	<c:if test="${passwordError=='1'}"> <%// 회원가입 실패에 따른 출력문들 %>
 	<script>
         alert('비밀번호가 다릅니다');
 	</script>
 	</c:if>
-	<c:if test="${signupSucessFail==1}">
+	<c:if test="${signupSuccessFail=='1'}">
 	<script>
         alert('회원가입 실패');
 	</script>
 	</c:if>
-	
 	
     <div class="title">
         <p>커뮤니티 사이트</p>

@@ -42,7 +42,7 @@ public class StudentService {
 		close(conn);
 		return result;
 	}
-	public Map<String, Object> selectListStudent(int currentPage, int pageSize) {  // 페이징처리
+	public Map<String, Object> selectListStudent(int currentPage, int pageSize ) {  // 페이징처리
 		Connection conn = getConnection();
 		int totalCnt = dao.getTotalCount(conn);
 		List<StudentVo> result =  dao.selectListStudent(conn,currentPage, pageSize, totalCnt);

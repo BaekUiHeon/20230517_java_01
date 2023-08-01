@@ -27,11 +27,11 @@ public class BoardService {
 		return result;
 	}
 	
-	public int write(String id,String subject,String content) {
+	public int write(String mid,String subject,String content) {
 		int result =0;
 		conn=getConnection();
 		BoardDao dao=new BoardDao();
-		result=dao.write(conn,id,subject,content);
+		result=dao.write(conn,mid,subject,content);
 		close(conn);
 		return result;
 	}

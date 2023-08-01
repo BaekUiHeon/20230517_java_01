@@ -57,7 +57,7 @@
     }
     input[type=submit]{
         position: relative;
-        top: 13px;
+        top: 57px;
         left: 720px;
         background-color: gray;
         border: none;
@@ -92,11 +92,15 @@
     </style>
 </head>
 <body>
+	<c:if test="${writeSucessFail==1}">
+		<script>
+        alert('게시물작성이 실패하였습니다.');
+		</script>
+	</c:if>
     <div class="title">
         <p>커뮤니티 사이트</p>
     </div>
     <form action="${request.getContextPath()}/semi/write.do" method="get">
-    	<td class="title2">게시물 작성</td>
         <table>
             <tr>
                 <td class="col1">제목</td>

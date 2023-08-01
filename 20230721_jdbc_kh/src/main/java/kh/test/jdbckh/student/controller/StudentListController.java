@@ -32,10 +32,12 @@ public class StudentListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/student/list doGet() 진입");
+		//// 1. 전달받은 parameter 읽어내기
 		String searchWord = request.getParameter("searchWord");
-		String pageNoStr = request.getParameter("pageNoStr");
-		int currentPage = 1; 
-		int pageSize = 10;  
+		String pageNoStr = request.getParameter("pageNo");
+		// String --> int
+		int currentPage = 1;  // 현재페이지
+		int pageSize = 10;  // 페이지당 개수
 		if(pageNoStr != null) {
 			try {
 				currentPage = Integer.parseInt(pageNoStr);
@@ -43,15 +45,24 @@ public class StudentListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		//// 2. 전달받은 데이터를 활용해 
+		// 2. DB학생 상세 정보 가져오기
 		StudentService service = new StudentService(); 
+		//List<StudentVo> result = null;
 		Map<String, Object> map = null;
 		if(searchWord != null) {
+			// 검색
+			//result = service.selectListStudent(searchWord);
 			map = service.selectListStudent(currentPage, pageSize, searchWord);
 		} else {
+			// 전체
+//			result = dao.selectListStudent();
+			// 페이징
 			map = service.selectListStudent(currentPage, 10);
 		}
+		// 3. DB로부터 전달받은 데이터를 JSP에 전달함.
 		request.setAttribute("studentList", map.get("studentList"));
+		// 페이징 - 
 		int pageBlockSize = 5;
 		int totalCnt = (Integer)map.get("totalCnt");
 		int totalPageNum = totalCnt/pageSize + (totalCnt%pageSize == 0 ? 0 : 1);
@@ -70,6 +81,15 @@ public class StudentListController extends HttpServlet {
 		if(searchWord != null) {
 			request.setAttribute("searchWord", searchWord);
 		}
+		// 4. JSP 파일 forward로 열기
 		request.getRequestDispatcher("/WEB-INF/view/student/list.jsp").forward(request, response);
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		doGet(request, response);
+//	}
+
 }

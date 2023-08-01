@@ -103,10 +103,12 @@
 <body>
 		<c:if test="${success==1}">
 		<script>
-    	function showAlert() {
         alert('로그인성공');
-    	}
-    	showAlert();
+		</script>
+		</c:if>
+		<c:if test="${writeSucessFail==1}">
+		<script>
+        alert('게시물작성이 완료되었습니다.');
 		</script>
 		</c:if>
         <div class="title">
@@ -136,7 +138,7 @@
                 </tr>
                 </c:forEach>
             </table>
-            <div class="write"><a href="${request.getContextPath()}/semi/write?id=id">작성</a></div>
+            <div class="write"><a href="${request.getContextPath()}/semi/write">작성</a></div>
         </div>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>

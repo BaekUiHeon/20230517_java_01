@@ -13,12 +13,15 @@ import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 public class BoardDao {
-	public int write(Connection conn,String id,String subject,String content) {
+	public int write(Connection conn,String mid,String subject,String content) {
 		int result=0;
 		String query="insert into tbl_board (id,subject,content) values(?,?,?)";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,mid);
+			pstmt.setString(1,subject);
+			pstmt.setString(1,content);
 			result=pstmt.executeUpdate();
 			System.out.println("데이터베이스 게시물 insert완료");
 		} catch (SQLException e) {
