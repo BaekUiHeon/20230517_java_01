@@ -42,8 +42,7 @@ public class SignupServlet extends HttpServlet {
 		System.out.println(password2);
 		
 		if(!password1.equals(password2)) {
-			request.setAttribute("alert",1);
-			System.out.println("alert1");
+			request.setAttribute("passworderror",1);
 			request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
 		else{
@@ -58,12 +57,12 @@ public class SignupServlet extends HttpServlet {
 			int result = bs.signup(vo);
 			if(result==1) {
 				System.out.println("회원가입 성공");
-				request.setAttribute("alert",1);
+				request.setAttribute("signupSuccessfail",1);
 				request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
 			}
 			else {
 				System.out.println("회원가입 실패");
-				request.setAttribute("alert",1);
+				request.setAttribute("signupSuccessfail",1);
 				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
 		}

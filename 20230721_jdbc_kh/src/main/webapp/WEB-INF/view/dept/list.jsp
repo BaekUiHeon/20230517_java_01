@@ -17,6 +17,6 @@
 			<td>개설여부</td>
 			<td>정원</td>
 		</tr>
-	</table>
+	</table> 
 </body>
 </html>

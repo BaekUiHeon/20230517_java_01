@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ page errorPage="/WEB-INF/view/error/errorForm.jsp"--%>
+
 <!DOCTYPE html>
 <html>	
 <head>
@@ -92,20 +94,14 @@
     </style>
 </head>
 <body>
-	<c:if test="${alert==1}"> <%// 회원가입 실패에 따른 출력문들 %>
+	<c:if test="${passworderror==1}"> <%// 회원가입 실패에 따른 출력문들 %>
 	<script>
-    function showAlert() {
         alert('비밀번호가 다릅니다');
-    }
-    showAlert();
 	</script>
 	</c:if>
-	<c:if test="${alert==1}">
+	<c:if test="${signupSucessFail==1}">
 	<script>
-    function showAlert() {
         alert('회원가입 실패');
-    }
-    showAlert();
 	</script>
 	</c:if>
 	

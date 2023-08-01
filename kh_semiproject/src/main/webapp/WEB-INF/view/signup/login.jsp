@@ -94,28 +94,19 @@
 </head>
 <body>
     <body>
-	 <c:if test="${alert==1}">
+	 <c:if test="${signupSuccessfail==1}">
 		<script>
-    	function showAlert() {
         alert('회원가입성공 로그인하세요.');
-    	}
-    	showAlert();
 		</script>
 	</c:if>
-   	<c:if test="${success==0}">
+   	<c:if test="${loginSucessFail==0}">
 		<script>
-    	function showAlert() {
         alert('아이디가 존재하지 않습니다.');
-    	}
-    	showAlert();
 		</script>
 	</c:if>
-	<c:if test="${success==1}">
+	<c:if test="${loginSucessFail==1}">
 		<script>
-    	function showAlert() {
         alert('비밀번호가 틀렸습니다.');
-    	}
-    	showAlert();
 		</script>
 	</c:if>
         <div class="title">
