@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import board.model.dao.BoardDao;
+import board.model.vo.CommentVo;
 import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
@@ -14,6 +15,46 @@ import static common.jdbc.JdbcTemplate.*;
 public class BoardService {
 	
 	private static Connection conn=null;
+
+	
+	public List<CommentVo> getComment(String idx){
+		List<CommentVo> commentList=null;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		commentList=dao.getComment(conn,idx);
+		close(conn);
+		return commentList;
+	}
+	
+	public int updateLike(String mid,String idx) {
+		int result=-1;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.checkLike(conn,mid,idx);
+		if(result==0)
+			result=dao.insertLike(conn,mid,idx);
+		else if(result==1){
+			result=dao.deleteLike(conn,mid,idx);
+		}
+		close(conn);
+		return result;
+	}
+	public int countLike(String idx) {
+		int result=-1;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.countLike(conn,idx);
+		close(conn);
+		return result;
+	}
+	public boardVo getBoard(String idx) {
+		boardVo result=null;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.getBoard(conn,idx);
+		close(conn);
+		return result;
+	}
 	
 	public int rewrite(String idx,String subject,String content) {
 		int result =0;

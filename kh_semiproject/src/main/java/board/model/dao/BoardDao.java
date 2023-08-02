@@ -1,6 +1,5 @@
 package board.model.dao;
 import static common.jdbc.JdbcTemplate.*;
-import static common.jdbc.JdbcTemplate.getConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +8,143 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.model.vo.CommentVo;
 import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 public class BoardDao {
+	public List<CommentVo> getComment(Connection conn,String idx){
+		List<CommentVo> commentList=null;
+		BoardDao dao=new BoardDao();
+		commentList=dao.getComment(conn,idx);
+		String query="select * from tbl_comment where idx=? order by "; 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		return commentList;
+	}
+	
+	public int insertLike(Connection conn,String mid,String idx) {
+		int result=-1;
+		String query="insert into like values(?,?)";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,mid);
+			result=pstmt.executeUpdate();
+			System.out.println("dao like입력완료");
+			if(rs.next()) {
+				result=1;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int deleteLike(Connection conn,String mid,String idx) {
+		int result=-1;
+		String query="delete from tbl_like where idx=? and id=?";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,mid);
+			result=pstmt.executeUpdate();
+			System.out.println("dao like삭제완료");
+			if(rs.next()) {
+				result=1;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int checkLike(Connection conn,String mid,String idx) {
+		int result=0;
+		String query="select id countlike from like where id=? and idx=?";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,mid);
+			pstmt.setString(2,idx);
+			result=pstmt.executeUpdate();
+			if(rs.next()) {
+				result=1;
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int countLike(Connection conn,String idx) {
+		int result=-1;
+		String query="select count(*) countlike from like where idx=?";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt(1);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			close(rs);
+			close(pstmt);
+		}
+			return result;
+	}
+	
+	public boardVo getBoard(Connection conn,String idx) {
+		String query="select idx,subject,content,to_char(wdate),id from tbl_board where idx=?";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		boardVo vo=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			rs=pstmt.executeQuery();
+			vo=new boardVo();
+			if(rs.next()) {
+				vo.setIdx(rs.getString(1));
+				vo.setSubject(rs.getString(2));
+				vo.setContent(rs.getString(3));
+				vo.setWdate(rs.getString(4));
+				vo.setId(rs.getString(5));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(rs);
+			close(pstmt);
+		}
+		return vo;
+	}
+	
 	public int write(Connection conn,String mid,String subject,String content) {
 		int result=0;
 		String query="insert into tbl_board (id,subject,content) values(?,?,?)";
@@ -20,8 +152,9 @@ public class BoardDao {
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,mid);
-			pstmt.setString(1,subject);
-			pstmt.setString(1,content);
+			pstmt.setString(2,subject);
+			pstmt.setString(3,content);
+			System.out.println("wirte의 exceuteUpdate직전");
 			result=pstmt.executeUpdate();
 			System.out.println("데이터베이스 게시물 insert완료");
 		} catch (SQLException e) {
@@ -50,7 +183,7 @@ public class BoardDao {
 		finally {
 			close(pstmt);
 		}
-		if(result==1) {
+		if(result==1) { //content가 바뀌었다면 뒤이어 제목도 바꿈. service에서 rollback처리.
 			query="update tbl_board set subject=? where idx=?";
 			try {
 				pstmt=conn.prepareStatement(query);

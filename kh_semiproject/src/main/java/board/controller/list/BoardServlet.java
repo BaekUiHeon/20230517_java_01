@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.model.service.BoardService;
+import board.model.vo.boardVo;
+
 /**
  * Servlet implementation class BoardServlet
  */
@@ -27,7 +30,35 @@ public class BoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/view/content/board.jsp");
+		String switchLike=request.getParameter("switchLike");
+		String idx = request.getParameter("idx");
+		int countLike=0;
+		if(switchLike!=null) {	
+			BoardService bs=new BoardService();
+			bs.updateLike((String)request.getSession().getAttribute("mid"),idx);
+			bs.countLike(idx);
+			request.setAttribute("countLike",countLike);
+		}
+		else {
+			BoardService bs=new BoardService();
+			bs.countLike(idx);
+			request.setAttribute("countLike",countLike);
+		}
+		if(idx!=null) {
+		BoardService bs=new BoardService();
+		boardVo vo=bs.getBoard(idx);
+		if(vo!=null) {
+		request.setAttribute("vo", vo);
+		request.getRequestDispatcher("WEB-INF/view/content/board.jsp").forward(request, response); //<추후 JSP작업 필요함.(vo 사용)>
+		}
+		else {
+			request.setAttribute("nullError",1); //<list에서 alert문 추가필요 필요>
+			request.getRequestDispatcher("/list").forward(request, response); //해당하는 게시물이 없다면 list로 다시이동해야함.
+		}
+		}
+		else { //번호없이 이주소를 쳤다면 list로 바로이동하도록함.
+			response.sendRedirect(request.getContextPath()+"/list");
+		}
 	}
 
 	/**

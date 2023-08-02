@@ -130,8 +130,8 @@
                     <th class="col4">작성일</th>   
                 </tr>
                 <c:forEach items="${list}" var="item">
-                <tr> 
-                    <td>${item.idx}</td>
+               <tr> 
+                    <td><a href="${request.getContextPath()}/semi/board?idx=${item.idx}">${item.idx}</a></td>
                     <td>${item.writer}</td>
                     <td>${item.subject}</td>
                     <td>${item.wdate}</td>   

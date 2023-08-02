@@ -111,7 +111,6 @@
                 <td class="cols2"><textarea name=content  <c:if test="${content!=null}">value="${content}"</c:if> required></textarea></td>
             </tr>
         </table>
-        <input type="hidden" name="idx" value="${idx}"> <%//idx값이 존재한다면... 수정함수를 호출하도록 writecontroller에서 작성해야함 %>
         <input type="submit" value="완료">
     </form>
     <div>

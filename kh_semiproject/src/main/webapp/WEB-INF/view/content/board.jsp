@@ -96,30 +96,33 @@
         </div>
         <div class="content">
         <%//게시글번호(idx),(접속계정)id받아와야함 %>
-        	<a href="${request.getContextPath()}/list.board?like=1" class="like">좋아요 ${count}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
-            <p>제목:${subject}</p>
+        	<a href="${request.getContextPath()}/list.board?switchLike=1&idx=${idx}" class="like">좋아요 ${countLike}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
+            <p>제목:${vo.subject}</p>
             <div>
-                <p>작성자:${writer}</p>
-                <p>작성일:${wdate}</p>
+                <p>작성자:${vo.writer}</p>
+                <p>작성일:${vo.wdate}</p>
             </div>
             <div class=content1>
-                <p>내용:${content}</p>
+                <p>내용:${vo.content}</p>
             </div>
             <div>
                 <p>댓글 조회</p>
             </div>
             <table>
-            <c:forEach items=${commentList var="item" }>
+            <c:forEach items=${commentList} var="item">
                 <tr>
+                	<c:forEach begin="0" end="${item.lever - 1}" varStatus="loop">
+            			<td></td>
+        			</c:forEach>
                     <td>${item.writer }: ${item.content }</td>
-                    <c:if test="${mid==item.id}"><%//writer 동일하다면 나오게 코드구현해야함%>
-                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td> 
+                    <c:if test="${mid==item.id}"><%--writer 동일하다면 나오게 코드구현해야함--%>
+                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td>  <%--수정필요--%>
                     </c:if>
                 </tr>
                 </c:forEach>
             </table>
         </div>
-        <div class="comment">
+        <div class="comment"> <%--comment에 대한 if문이 서블릿에서 필요--%>
             <p>댓글작성</p>
             <form action="${request.getContextPath()}/semi/board" method="get"> <%--댓글작성에 대한 함수필요--%>
                 <input type="text" name="comment">
@@ -128,8 +131,8 @@
         </div>
         <nav>
             <a href="${request.getContextPath()}/semi/list">목록</a> 
-            <c:if test="${mid==id}"> <%--접속 계정에따른 조건문--%>
-            <a href="${request.getContextPath()}/semi/write?idx=${idx}&content=${content}&subject=${subject}">수정</a> <%--idx값 입력있어야함--%>
+            <c:if test="${mid==vo.id}"> <%--접속 계정에따른 조건문--%>
+            <a href="${request.getContextPath()}/semi/write?idx=${vo.idx}&content=${vo.content}&subject=${vo.subject}">수정</a> <%--idx값 입력있어야함--%>
             </c:if>
             <a href="${request.getContextPath()}/semi/write">작성</a>
         </nav>

@@ -1,3 +1,4 @@
+
 package board.controller.main;
 
 import java.io.IOException;
@@ -21,7 +22,6 @@ public class MainServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

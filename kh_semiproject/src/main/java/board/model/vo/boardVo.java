@@ -14,6 +14,10 @@ public class boardVo {
     private String writer; //테이블에는 존재하지 않는 컬럼이나 join이 사용되는 함수에서 쓰기위해 추가함.
     
     
+	public boardVo() {
+		super();
+	}
+
 	public boardVo(String idx, String subject, String content, String wdate, String id, String writer) {
 		super();
 		this.idx = idx;
@@ -47,11 +51,11 @@ public class boardVo {
 				+ ", id=" + id + "]";
 	}
 
-	public String getidx() {
+	public String getIdx() {
 		return idx;
 	}
 
-	public void setidx(String idx) {
+	public void setIdx(String idx) {
 		this.idx = idx;
 	}
 
