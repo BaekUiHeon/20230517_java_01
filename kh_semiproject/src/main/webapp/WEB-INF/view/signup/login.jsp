@@ -120,7 +120,7 @@
                 <table>
                     <tr>
                         <th>아이디</th>    
-                        <td><input type="text" name="id" required></td>  
+                        <td><input type="text" name="id" required></td>
                     </tr>
                     <tr>
                         <th>비밀번호</th>

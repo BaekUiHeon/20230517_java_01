@@ -114,4 +114,12 @@ public class BoardService {
 		int result=dao.signup(conn,vo);
 		return result;
 	}
+
+	public int checkId(String id) {
+		int result=0;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.checkId(conn,id);
+		return result;
+	}
 }

@@ -364,4 +364,31 @@ public class BoardDao {
 		}
 		return result;
 	}
+
+	public int checkId(Connection conn, String id) {
+		System.out.println("dao [checkId] id : "+id);
+		int result=0;
+		String query="select id from tbl_writer where id=?";
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {				
+				if(rs.getString("id").equals(id))
+					result=1;
+			}
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+			close(rs);
+		}
+		System.out.println("dao [checkId] return : "+result);
+		return result;
+	}
 }

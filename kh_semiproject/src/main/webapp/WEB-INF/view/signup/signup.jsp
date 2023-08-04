@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ page errorPage="/WEB-INF/view/error/errorForm.jsp"--%>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!DOCTYPE html>
 <html>	
 <head>
@@ -57,13 +58,13 @@
     }
     .IdInfo{
         position:fixed;
-        left: 700px;
-        top: 190px;
+        left: 705px;
+        top: 180px;
     }
     .PassInfo{
         position:fixed;
-        left: 700px;
-        top: 230px;
+        left: 705px;
+        top: 220px;
     }
     button{
         position: absolute;
@@ -91,6 +92,9 @@
         text-decoration-line: none;
         font-size: 21px;
     }
+    #check_id{
+    width: 70px;
+    }
     </style>
 </head>
 <body>
@@ -116,7 +120,8 @@
             <table>
                 <tr>
                     <th>아이디</th>    
-                    <td><input type="text"  name="id" pattern="[A-Za-z0-9]+" required></td>  
+                    <td><input type="text"  name="id" pattern="[A-Za-z0-9]+" required></td> 
+                    <td class="check_id"><input type="button" id="check_id" value="중복검사"></td> 
                 </tr>
                 <tr>
                     <th>비밀번호</th>
@@ -142,5 +147,22 @@
     <div class="footer">
         <p>copyright (c) 백의헌 게시판만들기</p>
     </div>
+    <script>
+        	$("#check_id").click(check_id);
+        	function check_id(){
+        		var idValue = $("input[name='id']").val();
+        		$.ajax({
+        			url:"${pageContext.request.contextPath}/checkid",
+        			type:"get",
+        			data: {id:idValue},
+        			success: resultIdCheck
+        		});
+        	}
+        	function resultIdCheck(result){
+        		if(result){
+        			alert("중복된 아이디입니다.");
+        		}
+        	}
+        </script>
 </body>
 </html>
