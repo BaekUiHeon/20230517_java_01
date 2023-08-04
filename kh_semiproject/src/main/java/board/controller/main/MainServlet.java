@@ -26,13 +26,10 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("logout")!=null){
+		if(request.getParameter("logout")!=null){ //로그아웃 버튼이 눌렸다면 mid제거.
 			request.getSession().removeAttribute("mid");
-			response.sendRedirect(request.getContextPath()+"/main");
 		}
-		else {
-		request.getRequestDispatcher("/WEB-INF/view/main/main.jsp").forward(request, response); // 비로그인 상태에서만 접속가능한 웹페이지
-		}
+		request.getRequestDispatcher("/WEB-INF/view/main/main.jsp").forward(request, response); 
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
