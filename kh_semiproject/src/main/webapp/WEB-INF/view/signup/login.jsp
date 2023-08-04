@@ -94,7 +94,7 @@
 </head>
 <body>
     <body>
-	 <c:if test="${signupSuccessfail==1}">
+	 <c:if test="${singupSuccessFail==1}">
 		<script>
         alert('회원가입성공 로그인하세요.');
 		</script>
@@ -116,7 +116,7 @@
         <div class="PassInfo"><p>10자이상 대소문자,숫자포함</p></div>
         <div class="login">
             <h2>로그인</h2>
-            <form action="${request.getContextPath()}/semi/login" method="post">  
+            <form action="<%=request.getContextPath()%>/login" method="post">  
                 <table>
                     <tr>
                         <th>아이디</th>    
@@ -129,7 +129,7 @@
                 </table>
                 <button type="submit">확인</button>
             </form>
-            <a href="${request.getContextPath()}/semi/signup">회원가입</a> 
+            <a href="<%=request.getContextPath()%>/signup">회원가입</a> 
         </div>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>

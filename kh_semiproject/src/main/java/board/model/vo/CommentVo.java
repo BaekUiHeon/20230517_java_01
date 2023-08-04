@@ -9,7 +9,15 @@ public class CommentVo {
 //	NUMBER	STEP	No	"1	"	6	원본글기준 답글순서
 //	VARCHAR2(10 BYTE)	ID	No		7	아이디,UNIQUE
     private int cidx;      // 번호 (CIDX_SEQUENCE.NEXTVAL)
-    private int idx;       // 게시글번호
+    private int ccidx;
+    public int getCcidx() {
+		return ccidx;
+	}
+
+	public void setCcidx(int ccidx) {
+		this.ccidx = ccidx;
+	}
+	private int idx;       // 게시글번호
     private String content; // 내용
     private String wdate; // 작성일
     private int level;      // 답글의 깊이 (1)

@@ -96,7 +96,7 @@
         </div>
         <div class="content">
         <%//게시글번호(idx),(접속계정)id받아와야함 %>
-        	<a href="${request.getContextPath()}/list.board?switchLike=1&idx=${idx}" class="like">좋아요 ${countLike}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
+        	<a href="<%=request.getContextPath()%>/board?switchLike=1&idx=${idx}" class="like">좋아요 ${countLike}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
             <p>제목:${vo.subject}</p>
             <div>
                 <p>작성자:${vo.writer}</p>
@@ -116,7 +116,7 @@
         			</c:forEach>
                     <td>${item.writer }: ${item.content }</td>
                     <c:if test="${mid==item.id}"><%--writer 동일하다면 나오게 코드구현해야함--%>
-                    <td><a href="${request.getContextPath()}/semi/board?deletecommentitem=item">삭제</a></td>  <%--수정필요--%>
+                    <td><a href="<%=request.getContextPath()%>/board?deletecommentitem=item">삭제</a></td>  <%--수정필요--%>
                     </c:if>
                 </tr>
                 </c:forEach>
@@ -124,17 +124,17 @@
         </div>
         <div class="comment"> <%--comment에 대한 if문이 서블릿에서 필요--%>
             <p>댓글작성</p>
-            <form action="${request.getContextPath()}/semi/board" method="get"> <%--댓글작성에 대한 함수필요--%>
+            <form action="<%=request.getContextPath()%>/board" method="get"> <%--댓글작성에 대한 함수필요 ajax적용?--%>
                 <input type="text" name="comment">
                 <input type="submit" value="작성완료">
             </form>
         </div>
         <nav>
-            <a href="${request.getContextPath()}/semi/list">목록</a> 
+            <a href="<%=request.getContextPath()%>/list">목록</a> 
             <c:if test="${mid==vo.id}"> <%--접속 계정에따른 조건문--%>
-            <a href="${request.getContextPath()}/semi/write?idx=${vo.idx}&content=${vo.content}&subject=${vo.subject}">수정</a> <%--idx값 입력있어야함--%>
+            <a href="<%=request.getContextPath()%>/write?idx=${vo.idx}&content=${vo.content}&subject=${vo.subject}">수정</a> <%--idx값 입력있어야함--%>
             </c:if>
-            <a href="${request.getContextPath()}/semi/write">작성</a>
+            <a href="<%=request.getContextPath()%>/write">작성</a>
         </nav>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>

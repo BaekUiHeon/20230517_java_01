@@ -100,7 +100,7 @@
     <div class="title">
         <p>커뮤니티 사이트</p>
     </div>
-    <form action="${request.getContextPath()}/semi/write.do" method="get">
+    <form action="<%=request.getContextPath()%>/write.do" method="get">
         <table>
             <tr>
                 <td class="col1">제목</td>
@@ -114,7 +114,7 @@
         <input type="submit" value="완료">
     </form>
     <div>
-        <a href="${request.getContextPath()}/semi/list" class="list">목록</a>
+        <a href="<%=request.getContextPath()%>/list" class="list">목록</a>
     </div>
     <div class="footer">
         <p>copyright (c) 백의헌 게시판만들기</p>

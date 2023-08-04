@@ -94,12 +94,12 @@
     </style>
 </head>
 <body>
-	<c:if test="${passwordError=='1'}"> <%// 회원가입 실패에 따른 출력문들 %>
+	<c:if test="${passwordError==1}"> <%// 회원가입 실패에 따른 출력문들 %>
 	<script>
         alert('비밀번호가 다릅니다');
 	</script>
 	</c:if>
-	<c:if test="${signupSuccessFail=='1'}">
+	<c:if test="${signupSuccessFail==1}">
 	<script>
         alert('회원가입 실패');
 	</script>
@@ -112,7 +112,7 @@
     <div class="PassInfo"><p>10자이상 대소문자,숫자포함</p></div>
     <div class="signup">
         <h2>회원가입</h2>
-        <form action="${request.getContextPath()}/semi/signup" method="post"> <!--주소 입력해주어야함-->
+        <form action="<%=request.getContextPath()%>/signup" method="post"> <!--주소 입력해주어야함-->
             <table>
                 <tr>
                     <th>아이디</th>    
@@ -138,7 +138,7 @@
             <button type="submit">확인</button>
         </form>
     </div>
-    <div><a href="${request.getContextPath()}/semi/login">로그인</a></div>
+    <div><a href="<%=request.getContextPath()%>/login">로그인</a></div>
     <div class="footer">
         <p>copyright (c) 백의헌 게시판만들기</p>
     </div>

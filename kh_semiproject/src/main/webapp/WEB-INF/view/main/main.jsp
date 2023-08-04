@@ -61,18 +61,35 @@
         font-weight: bold;
         color: black;
     }
+    .logout{
+        position: absolute;
+        bottom: 250px;
+        left: 470px;
+        width: 80px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        background-color: gray;
+    }
     </style>
 </head>
 <body>
     <div class="title">
         <p>커뮤니티 사이트</p>
     </div>
+    <c:if test="${empty mid}">
     <div class="login">
-        <a href="${request.getContextPath()}/semi/login">로그인</a>
+        <a href="<%=request.getContextPath()%>/login">로그인</a>
     </div>
     <div class="signup">
-        <a href="${request.getContextPath()}/semi/signup">회원가입</a>
+        <a href="<%=request.getContextPath()%>/signup">회원가입</a>
     </div>
+    </c:if>
+    <c:if test="${not empty mid}">
+      <div class="logout">
+        <a href="<%=request.getContextPath()%>/main?logout=1">로그아웃</a>
+    </div>
+    </c:if>
     <div class="footer">
         <p>copyright (c) 백의헌 게시판만들기</p>
     </div>

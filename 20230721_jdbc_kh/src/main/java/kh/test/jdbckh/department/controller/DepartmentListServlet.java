@@ -33,6 +33,8 @@ public class DepartmentListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DepartmentService service = new DepartmentService();
+/* paging, search 기능
 		String searchWord = request.getParameter("searchWord");
 		String pageNoStr = request.getParameter("pageNo");
 		int currentPage = 1;
@@ -40,12 +42,15 @@ public class DepartmentListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(pageNoStr);
 		} catch (Exception e) {
 		}
-		
-		DepartmentService service = new DepartmentService();
 		List<DepartmentDto> deptList = service.selectList(currentPage, PAGE_SIZE, searchWord);
-		request.setAttribute("deptList", deptList);
-		
-		request.getRequestDispatcher("/WEB-INF/view/dept/list.jsp").forward(request, response);
+*/
+		List<DepartmentDto> deptList = service.selectList();
+		if(deptList != null && deptList.size() > 0) {
+			request.setAttribute("deptList", deptList);
+			request.getRequestDispatcher("/WEB-INF/view/dept/list.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath()+"/main");
+		}
 	}
 
 	/**

@@ -32,7 +32,7 @@ public class ListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("mid")!=null) { // 비로그인 상태에서만 접속가능한 웹페이지
+		if(request.getSession().getAttribute("mid")!=null) { // 로그인 상태에서만 접속가능한 웹페이지
 		String searchWord=(String)request.getAttribute("searchWord");
 		String PageNoStr=(String)request.getAttribute("PageNo");
 		int currentPage=1;
@@ -89,7 +89,7 @@ public class ListServlet extends HttpServlet {
 		}
 		else{
 			System.out.println("비로그인 상태로 로그인이 필요한 사이트에 접속함");
-			response.sendRedirect(request.getContextPath()+"/semi/main");
+			response.sendRedirect(request.getContextPath()+"/main");
 		}
 	}
 }

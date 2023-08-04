@@ -98,6 +98,11 @@
         left: 570px;
         bottom: 40px;
     }
+    .paging{
+    	position:absolute;
+    	bottom:80px;
+    	left:400px;
+    }
 </style>
 </head>
 <body>
@@ -117,7 +122,7 @@
         <div class="list">
         <div class="notice"><p>총 개의 게시물이 있습니다</p></div>
         <span class="search">
-            <form action ="${request.getContextPath()}/semi/list" method="get">
+            <form action ="<%=request.getContextPath()%>/list" method="get">
                 <input type="search" name="searchWord">
                 <input type="submit" value="찾기">
             </form>
@@ -131,14 +136,25 @@
                 </tr>
                 <c:forEach items="${list}" var="item">
                <tr> 
-                    <td><a href="${request.getContextPath()}/semi/board?idx=${item.idx}">${item.idx}</a></td>
+                    <td><a href="<%=request.getContextPath()%>/board?idx=${item.idx}">${item.idx}</a></td>
                     <td>${item.writer}</td>
                     <td>${item.subject}</td>
                     <td>${item.wdate}</td>   
                 </tr>
                 </c:forEach>
-            </table>
-            <div class="write"><a href="${request.getContextPath()}/semi/write">작성</a></div>
+    		</table>
+               <div class="paging">
+                <c:if test="${startPageNum!=1}">  <%--페이징 이전,번호,다음에 대한 코드 --%>
+                	<a href="<%=request.getContextPath()%>/list?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+                </c:if>
+                <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 
+                <a href="<%=request.getContextPath()%>/list?currentPage=${i}&searchWord=${searchWord}"><span>${i} </span></a> <%--searchWord검사필요--%>
+                </c:forEach>
+                <c:if test="${endPageNum<totalPageNum}">
+                	<a href="<%=request.getContextPath()%>/list?currentPageNum=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+                </c:if>
+           		</div>
+            <div class="write"><a href="<%=request.getContextPath()%>/write">작성</a></div>
         </div>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>
