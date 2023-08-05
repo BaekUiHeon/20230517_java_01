@@ -159,8 +159,14 @@
         		});
         	}
         	function resultIdCheck(result){
-        		if(result){
+        		if(result==1){
         			alert("중복된 아이디입니다.");
+        		}
+        		else if(result==0){
+        			alert("사용 가능한 아이디입니다.");
+        		}
+        		else {
+        			alert("체크실패");
         		}
         	}
         </script>

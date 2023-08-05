@@ -17,6 +17,31 @@ public class BoardService {
 	private static Connection conn=null;
 
 	
+	public int deleteComment(String idx,String cidx) {
+		int result=-1;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.deleteComment(conn,idx,cidx);
+		close(conn);
+		return result;
+	}
+	public int insertComment(String idx, String content,String depth,String step, String mid, String cidx) {
+		int result=-1;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		dao.updateComment(conn,idx,step);
+		result=dao.insertComment(conn,idx,content,depth,step,mid,cidx);
+		close(conn);
+		return result;
+	}
+	public int insertComment(String idx,String content,String mid) {
+		int result=-1;
+		conn=getConnection();
+		BoardDao dao=new BoardDao();
+		result=dao.insertComment(conn,idx,content,mid);
+		close(conn);
+		return result;
+	}
 	public List<CommentVo> getComment(String idx){
 		List<CommentVo> commentList=null;
 		conn=getConnection();
@@ -116,7 +141,7 @@ public class BoardService {
 	}
 
 	public int checkId(String id) {
-		int result=0;
+		int result=-1;
 		conn=getConnection();
 		BoardDao dao=new BoardDao();
 		result=dao.checkId(conn,id);

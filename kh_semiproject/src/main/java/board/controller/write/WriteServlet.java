@@ -31,7 +31,10 @@ public class WriteServlet extends HttpServlet {
 		System.out.println("게시물작성 서블릿 doget접속.");
 		if(request.getSession().getAttribute("mid")!=null) {
 		String subject = request.getParameter("subject");
+		System.out.println("idx(writeservlet):"+request.getParameter("idx"));
+		
 		if(subject!=null) { //제목이 있다는것은 수정이라는 뜻이니 제목,내용,게시글번호를 가지고 write.jsp를 열어라
+			System.out.println("수정열림");
 			request.setAttribute("subject", subject);
 			request.setAttribute("content", request.getParameter("content"));
 			request.setAttribute("idx",request.getParameter("idx"));

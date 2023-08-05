@@ -5,6 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>게시글목록</title>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <style>
     body{
         position: relative;
@@ -95,8 +96,7 @@
             <p>커뮤니티 사이트</p>
         </div>
         <div class="content">
-        <%//게시글번호(idx),(접속계정)id받아와야함 %>
-        	<a href="<%=request.getContextPath()%>/board?switchLike=1&idx=${idx}" class="like">좋아요 ${countLike}</a> <%--count와 클릭에따른 컨트롤과 함수코드필요 --%>
+        	<input type="button" value="좋아요:${countLike}" class="like">
             <p>제목:${vo.subject}</p>
             <div>
                 <p>작성자:${vo.writer}</p>
@@ -105,39 +105,74 @@
             <div class=content1>
                 <p>내용:${vo.content}</p>
             </div>
-            <div>
-                <p>댓글 조회</p>
+            
+	        <div>
+                <p>댓글</p>
             </div>
             <table>
-            <c:forEach items=${commentList} var="item">
+            <c:forEach items="${commentlist}" var="item">
                 <tr>
-                	<c:forEach begin="0" end="${item.lever - 1}" varStatus="loop">
+                	<c:forEach begin="0" end="${item.depth - 1}" varStatus="loop">
             			<td></td>
         			</c:forEach>
                     <td>${item.writer }: ${item.content }</td>
-                    <c:if test="${mid==item.id}"><%--writer 동일하다면 나오게 코드구현해야함--%>
-                    <td><a href="<%=request.getContextPath()%>/board?deletecommentitem=item">삭제</a></td>  <%--수정필요--%>
+                    <c:if test="${mid!=item.id}">
+                    <td><input type="button" value="댓글달기"></td>
+                    </c:if>
+                    <c:if test="${mid==item.id}">
+                    <td><input type="button" value="삭제"></td>
                     </c:if>
                 </tr>
                 </c:forEach>
-            </table>
+            </table> 
         </div>
-        <div class="comment"> <%--comment에 대한 if문이 서블릿에서 필요--%>
+        <c:if test="${mid!=vo.id}">
+        <div class="comment">
             <p>댓글작성</p>
-            <form action="<%=request.getContextPath()%>/board" method="get"> <%--댓글작성에 대한 함수필요 ajax적용?--%>
-                <input type="text" name="comment">
-                <input type="submit" value="작성완료">
-            </form>
+            <input type="text" id="comment">
+            <input type="button" value="작성완료">
         </div>
+        </c:if>
         <nav>
             <a href="<%=request.getContextPath()%>/list">목록</a> 
-            <c:if test="${mid==vo.id}"> <%--접속 계정에따른 조건문--%>
-            <a href="<%=request.getContextPath()%>/write?idx=${vo.idx}&content=${vo.content}&subject=${vo.subject}">수정</a> <%--idx값 입력있어야함--%>
+            <c:if test="${mid == vo.id}"> 
+            <a href="<%=request.getContextPath()%>/write?idx=${vo.idx}&content=${vo.content}&subject=${vo.subject}">수정</a>
             </c:if>
             <a href="<%=request.getContextPath()%>/write">작성</a>
         </nav>
         <div class="footer">
             <p>copyright (c) 백의헌 게시판만들기</p>
         </div>
+        <script>
+        	$(".like").click(update_like);
+        	function update_like(){
+        	$.ajax({
+        		url: "${pageContext.request.getContextPath()}/getlike",
+        		data:{idx:"${vo.idx}",mid:"${mid}"},
+        		type:'get',
+        		success:getlike
+        	});
+        	}
+        	function getlike(result) {
+        	    $(".like").val("좋아요:" + result);
+        	}
+        	
+        	
+          	$(".comment input[type=button]").click(insertcomment)
+        	function insertcomment(){
+        		var comment= $("#comment").val();
+        		$.ajax({
+        			url:"${pageContext.request.getContextPath()}/insertcomment",
+        			data:{content:comment, idx:"${vo.idx}"},
+        			type:'get',
+        			dataType:"Json",
+        			success:getcomment
+        		}
+        		);
+        	}
+        	function getcomment(data){
+        		
+        	}  
+        </script>
 </body>
 </html>

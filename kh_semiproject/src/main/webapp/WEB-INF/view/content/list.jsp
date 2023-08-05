@@ -106,6 +106,11 @@
 </style>
 </head>
 <body>
+		<c:if test="${nullError==1}">
+		<script>
+        alert('해당하는 게시물이 없습니다');
+		</script>
+		</c:if>
 		<c:if test="${success==1}">
 		<script>
         alert('로그인성공');

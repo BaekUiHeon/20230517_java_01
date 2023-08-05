@@ -34,7 +34,7 @@ function ajax1ClickHandler(){				// 1번 버튼 클릭시 실행될 함수에대
 	//var obj = {k1:12, k2:'dskfjsdf', k3:function(){}};
 	console.log("ajax로 데이터 전달 전-0");
 	$.ajax({								// 이 함수가 실행되면 ajax도 실행됨. 그ajax에 대한 정의.
-		url: "${pageContext.request.contextPath}/ajax1"		// 이동할 url
+		url: "${pageContext.request.getContextPath}/ajax1"		// 이동할 url
 		,type: "get"										// 보낼 type
 		,data: {n1:'값도가나?', n2:123} 						// 이동할떄 가져갈 data
 		,success: ajaxSuccess								// 값이 돌아왔을때 실행할 함수(인자1개)
@@ -44,7 +44,7 @@ function ajax1ClickHandler(){				// 1번 버튼 클릭시 실행될 함수에대
 function ajax2ClickHandler(){				// 2번 버튼 클릭시 실행될 함수에대한 정의 
 	console.log("btnajax2 click");
 	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax2"
+		url: "${pageContext.request.getContextPath}/ajax2"
 		,type: "post"
 		,success: ajaxSuccess2								//실행될 데이터 이름 ajaxSuccess2		
 		,dataType:"json"									//여기서는 받을 datatype이 json임.

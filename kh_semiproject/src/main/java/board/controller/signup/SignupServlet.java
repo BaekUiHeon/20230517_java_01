@@ -61,14 +61,13 @@ public class SignupServlet extends HttpServlet {
 			int result = bs.signup(vo);
 			if(result==1) {
 				System.out.println("회원가입 성공");
-				System.out.println("현재의 request.getContextPath주소"+request.getContextPath());
 				request.getSession().setAttribute("signupSuccessFail",1);
 				response.sendRedirect("/semi/login");
 			}
 			else {
 				System.out.println("회원가입 실패");
 				request.setAttribute("signupSuccessFail",1);
-				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp?").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/view/signup/signup.jsp").forward(request, response);
 			}
 		}
 	}

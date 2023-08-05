@@ -108,9 +108,10 @@
             </tr>
             <tr>
                 <td class="col1">내용</td>
-                <td class="cols2"><textarea name=content  <c:if test="${content!=null}">value="${content}"</c:if> required></textarea></td>
+                <td class="cols2"><textarea name=content required><c:if test="${content!=null}">${content}</c:if></textarea></td>
             </tr>
         </table>
+        <input type="hidden" name="idx" value="${idx}" >
         <input type="submit" value="완료">
     </form>
     <div>

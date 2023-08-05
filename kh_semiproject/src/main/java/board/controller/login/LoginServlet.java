@@ -31,7 +31,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("mid")==null) { // 비로그인 상태에서만 접속가능한 웹페이지
+		if(request.getSession().getAttribute("mid")==null) { //비로그인 상태라면 실행됨.
+		if(request.getSession().getAttribute("signupSuccessFail")!=null) {
+			request.setAttribute("signupSuccessFail",2);
+			request.getSession().removeAttribute("signupSuccessFail");
+		}
 		request.getRequestDispatcher("/WEB-INF/view/signup/login.jsp").forward(request, response);
 		}
 		else {
@@ -72,10 +76,3 @@ public class LoginServlet extends HttpServlet {
 			}
 		}
 	}
-
-//System.out.println("로그인 완료");
-//Map<String,Object> map=bs.selectList(1,10);
-//List<boardVo> list=(List<boardVo>)map.get("list");
-//int totalCnt=(int)map.get("totalCnt");
-//request.setAttribute("totalCnt",totalCnt);
-//request.setAttribute("list", list);

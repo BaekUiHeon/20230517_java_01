@@ -13,19 +13,10 @@ import board.model.vo.WriterVo;
 import board.model.vo.boardVo;
 
 public class BoardDao {
-	public List<CommentVo> getComment(Connection conn,String idx){
-		List<CommentVo> commentList=null;
-		BoardDao dao=new BoardDao();
-		commentList=dao.getComment(conn,idx);
-		String query="select * from tbl_comment where idx=? order by "; 
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		return commentList;
-	}
 	
 	public int insertLike(Connection conn,String mid,String idx) {
 		int result=-1;
-		String query="insert into like values(?,?)";
+		String query="insert into tbl_like values(?,?)";
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
@@ -34,9 +25,6 @@ public class BoardDao {
 			pstmt.setString(2,mid);
 			result=pstmt.executeUpdate();
 			System.out.println("dao like입력완료");
-			if(rs.next()) {
-				result=1;
-			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -58,9 +46,7 @@ public class BoardDao {
 			pstmt.setString(2,mid);
 			result=pstmt.executeUpdate();
 			System.out.println("dao like삭제완료");
-			if(rs.next()) {
-				result=1;
-			}
+			result=0;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -73,14 +59,14 @@ public class BoardDao {
 	}
 	public int checkLike(Connection conn,String mid,String idx) {
 		int result=0;
-		String query="select id countlike from like where id=? and idx=?";
+		String query="select id countlike from tbl_like where id=? and idx=?";
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,mid);
 			pstmt.setString(2,idx);
-			result=pstmt.executeUpdate();
+			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				result=1;
 			}
@@ -96,7 +82,7 @@ public class BoardDao {
 	}
 	public int countLike(Connection conn,String idx) {
 		int result=-1;
-		String query="select count(*) countlike from like where idx=?";
+		String query="select count(*) countlike from tbl_like where idx=?";
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
@@ -118,7 +104,7 @@ public class BoardDao {
 	}
 	
 	public boardVo getBoard(Connection conn,String idx) {
-		String query="select idx,subject,content,to_char(wdate),id from tbl_board where idx=?";
+		String query="select writer,idx,subject,content,to_char(wdate),id from (select * from tbl_board where idx=?) join tbl_writer using (id)";
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		boardVo vo=null;
@@ -128,11 +114,12 @@ public class BoardDao {
 			rs=pstmt.executeQuery();
 			vo=new boardVo();
 			if(rs.next()) {
-				vo.setIdx(rs.getString(1));
-				vo.setSubject(rs.getString(2));
-				vo.setContent(rs.getString(3));
-				vo.setWdate(rs.getString(4));
-				vo.setId(rs.getString(5));
+				vo.setWriter(rs.getString(1));
+				vo.setIdx(rs.getString(2));
+				vo.setSubject(rs.getString(3));
+				vo.setContent(rs.getString(4));
+				vo.setWdate(rs.getString(5));
+				vo.setId(rs.getString(6));
 			}
 		}
 		catch(SQLException e) {
@@ -366,8 +353,7 @@ public class BoardDao {
 	}
 
 	public int checkId(Connection conn, String id) {
-		System.out.println("dao [checkId] id : "+id);
-		int result=0;
+		int result=-1;
 		String query="select id from tbl_writer where id=?";
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -376,9 +362,10 @@ public class BoardDao {
 			pstmt.setString(1,id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {				
-				if(rs.getString("id").equals(id))
-					result=1;
+				result=1;
 			}
+			else
+				result=0;
 	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -390,5 +377,126 @@ public class BoardDao {
 		}
 		System.out.println("dao [checkId] return : "+result);
 		return result;
+	}
+
+	public int deleteComment(Connection conn, String idx, String cidx) {
+		int result=-1;
+		String query="delete from tbl_comment where idx=? and cidx=?";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,cidx);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int insertComment(Connection conn,String idx,String content,String mid) {
+		int result=-1;
+		String query="insert into tbl_comment (idx,content,step,id) values(?,?,(select case when max(step) is null then 1 else max(step)+1 end as tbl from tbl_comment where idx=?),?)"; //완성처리해야함.
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,content);
+			pstmt.setString(3,idx);
+			pstmt.setString(4,mid);
+			result=pstmt.executeUpdate();
+			System.out.println("result:"+result+"insert 실행되었음.");
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		finally {
+		close(pstmt);
+		}	
+		return result;
+	}
+	public int insertComment(Connection conn,String idx, String content,String depth,String step, 
+											 String mid, String cidx) {
+		int result=-1;
+		String query="insert into tbl_comment (idx,content,ccidx,depth,step,id) values(?,?,?,?+1,?+1,?)"; //완성처리해야함.
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,content);
+			pstmt.setString(3,cidx);
+			pstmt.setString(4,depth);
+			pstmt.setString(5,step);
+			pstmt.setString(6,mid);
+			result=pstmt.executeUpdate();
+			System.out.println("result:"+result+"insert 실행되었음.");
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+		finally {
+		close(pstmt);
+		}	
+		return result;
+	}
+	
+	public int updateComment(Connection conn,String idx,String step) {
+		int result=-1;
+		String query="update tbl_comment set step=step+1 where idx=? and step>?";
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,idx);
+			pstmt.setString(2,step);
+			result=pstmt.executeUpdate();
+			System.out.println("result="+result+"insert를 위한 updateComment가 실행되었음.");
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+		}
+		finally {
+		close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<CommentVo> getComment(Connection conn,String idx){ 
+		List<CommentVo> commentList=null;
+		String query="select ccidx,depth,step,content,cidx,id,wdate,writer from ((select * from tbl_comment where idx=?) join tbl_writer using (id)) order by step asc,ccidx,step desc"; 
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CommentVo vo=null;
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, idx);
+			rs=pstmt.executeQuery();
+			System.out.println("작성완료.");
+			commentList=new ArrayList<CommentVo>();
+			while(rs.next()) {
+				vo= new CommentVo();
+				vo.setCcidx(rs.getInt("ccidx"));
+				vo.setdepth(rs.getInt("depth"));
+				vo.setStep(rs.getInt("Step"));
+				vo.setContent(rs.getString("content"));
+				vo.setCidx(rs.getInt("cidx"));
+				vo.setId(rs.getString("id"));
+				vo.setWdate(rs.getString("wdate"));
+				vo.setWriter(rs.getString("writer"));
+				commentList.add(vo);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return commentList;
 	}
 }

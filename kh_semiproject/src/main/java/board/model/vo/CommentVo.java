@@ -5,7 +5,7 @@ public class CommentVo {
 //	NUMBER	IDX	No		2	게시글번호
 //	VARCHAR2(4000 BYTE)	CONTENT	No		3	내용
 //	TIMESTAMP(6)	WDATE	No	"SYSTIMESTAMP	"	4	작성일
-//	NUMBER	LEVEL	No	"1	"	5	답글의깊이
+//	NUMBER	depth	No	"1	"	5	답글의깊이
 //	NUMBER	STEP	No	"1	"	6	원본글기준 답글순서
 //	VARCHAR2(10 BYTE)	ID	No		7	아이디,UNIQUE
     private int cidx;      // 번호 (CIDX_SEQUENCE.NEXTVAL)
@@ -14,31 +14,44 @@ public class CommentVo {
 		return ccidx;
 	}
 
+	public CommentVo() {
+		super();
+	}
+
 	public void setCcidx(int ccidx) {
 		this.ccidx = ccidx;
 	}
 	private int idx;       // 게시글번호
     private String content; // 내용
     private String wdate; // 작성일
-    private int level;      // 답글의 깊이 (1)
+    private int depth;      // 답글의 깊이 (1)
     private int step;       // 원본글 기준 답글 순서 (1)
     private String id;      // 아이디, UNIQUE
+    private String writer;
     
-	public CommentVo(int cidx, int idx, String content, String wdate, int level, int step, String id) {
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public CommentVo(int cidx, int idx, String content, String wdate, int depth, int step, String id) {
 		super();
 		this.cidx = cidx;
 		this.idx = idx;
 		this.content = content;
 		this.wdate = wdate;
-		this.level = level;
+		this.depth = depth;
 		this.step = step;
 		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "CommentVo [cidx=" + cidx + ", idx=" + idx + ", content=" + content + ", wdate=" + wdate + ", level="
-				+ level + ", step=" + step + ", id=" + id + "]";
+		return "CommentVo [cidx=" + cidx + ", idx=" + idx + ", content=" + content + ", wdate=" + wdate + ", depth="
+				+ depth + ", step=" + step + ", id=" + id + "]";
 	}
 	
 	public int getCidx() {
@@ -65,11 +78,11 @@ public class CommentVo {
 	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
-	public int getLevel() {
-		return level;
+	public int getdepth() {
+		return depth;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+	public void setdepth(int depth) {
+		this.depth = depth;
 	}
 	public int getStep() {
 		return step;

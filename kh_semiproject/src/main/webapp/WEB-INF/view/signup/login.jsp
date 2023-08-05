@@ -94,7 +94,7 @@
 </head>
 <body>
     <body>
-	 <c:if test="${singupSuccessFail==1}">
+	 <c:if test="${signupSuccessFail==2}">
 		<script>
         alert('회원가입성공 로그인하세요.');
 		</script>

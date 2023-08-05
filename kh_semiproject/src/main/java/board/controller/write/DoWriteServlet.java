@@ -35,7 +35,8 @@ public class DoWriteServlet extends HttpServlet {
 		String subject=request.getParameter("subject");
 		String content=request.getParameter("content");
 		String idx=request.getParameter("idx");
-		if(request.getParameter(idx)!=null) {  		//idx(게시물번호)가 있다면 수정이니 idx 이용하여 수정.
+		System.out.println("idx(dowriteservlet):"+idx);
+		if(request.getParameter("idx")!=null) {  		//idx(게시물번호)가 있다면 수정이니 idx 이용하여 수정.
 			result=bs.rewrite(idx,subject,content);
 		}
 		else {										//아니라면 현재 계정을 이용하여 수정하면됨.

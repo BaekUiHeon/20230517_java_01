@@ -1,4 +1,4 @@
-package board.controller.login;
+package board.controller.signup;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,16 +31,14 @@ public class CheckIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("아이디 체크를 위한 서블릿진입.");
-		int result=0;
+		int result=-1;
 		String id=request.getParameter("id");
 		System.out.println("id");
 		PrintWriter out = response.getWriter();
 		BoardService bs = new BoardService();
 		result=bs.checkId(id);
-		if(result==1) {
-			out.print("중복된 아이디입니다.");
-			out.flush();
-			out.close();
-		}
+		out.print(result);
+		out.flush();
+		out.close();
 	}
 }
