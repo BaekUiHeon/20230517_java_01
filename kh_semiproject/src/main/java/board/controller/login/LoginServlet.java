@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		String password=request.getParameter("password");
 		String result = bs.login(id,password);
 		String signupSuccessFail=(String)request.getSession().getAttribute("signupSuccessFail");
-		if(signupSuccessFail!=null) { //do로 보내야할듯.
+		if(signupSuccessFail!=null) { 
 			request.setAttribute("singupSuccessFail",1);
 			request.getSession().removeAttribute("signupSuccessFail");
 		}

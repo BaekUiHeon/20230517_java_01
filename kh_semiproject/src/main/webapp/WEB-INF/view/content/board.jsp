@@ -170,9 +170,30 @@
         		}
         		);
         	}
-        	function getcomment(data){
-        		
-        	}  
-        </script>
+          	
+          	function getcomment(data) {
+          	    var commentlist = data.commentlist;
+          	    var table = $("<table></table>"); // 테이블 태그 생성
+
+          	    $.each(commentlist, function(index, item) {
+          	        var row = $("<tr></tr>");
+
+          	        for (var i = 0; i < item.depth; i++) {
+          	            $("<td></td>").appendTo(row);
+          	        }
+
+          	        $("<td>" + item.writer + ":" + item.content + "</td>").appendTo(row);
+          	        if ("${mid}" != item.id) {
+          	            $("<td><input type='button' value='댓글달기'></td>").appendTo(row);
+          	        } else {
+          	            $("<td><input type='button' value='삭제'></td>").appendTo(row);
+          	        }
+          	        row.appendTo(table);
+          	        console.log(row);
+          	    });
+
+          	    $("table").replaceWith(table);
+          	}   	 
+      </script>
 </body>
 </html>

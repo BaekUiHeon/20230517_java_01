@@ -2,7 +2,9 @@ package board.controller.list;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,11 +52,14 @@ public class InsertCommentServlet extends HttpServlet {
 				System.out.println("comment 입력완료.");
 			else if(result==-1)
 				System.out.println("comment 입력실패");
-			List<CommentVo> commentlist= bs.getComment(cidx);
+			List<CommentVo> commentlist= bs.getComment(idx);
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("commentlist",commentlist);
+			System.out.println("commentlist: "+commentlist);
 			Gson gson = new Gson();
 			
 			PrintWriter out = response.getWriter();
-			out.print(gson.toJson(commentlist));
+			out.print(gson.toJson(map));
 			out.flush();
 			out.close();
 			System.out.println("commentlist 전송완료(from insertCommentServlet)");
@@ -69,11 +74,14 @@ public class InsertCommentServlet extends HttpServlet {
 		else if(result==-1)
 			System.out.println("comment 입력실패");
 		
-		List<CommentVo> commentlist= bs.getComment(cidx);
+		List<CommentVo> commentlist= bs.getComment(idx);
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("commentlist",commentlist);
+		System.out.println("commentlist: "+commentlist);
 		Gson gson = new Gson();
 		
 		PrintWriter out = response.getWriter();
-		out.print(gson.toJson(commentlist));
+		out.print(gson.toJson(map));
 		out.flush();
 		out.close();
 		System.out.println("commentlist 전송완료(from insertCommentServlet)");
