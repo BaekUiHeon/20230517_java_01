@@ -149,7 +149,7 @@
         	$.ajax({
         		url: "${pageContext.request.getContextPath()}/getlike",
         		data:{idx:"${vo.idx}",mid:"${mid}"},
-        		type:'get',
+        		type:"get",
         		success:getlike
         	});
         	}
@@ -157,14 +157,14 @@
         	    $(".like").val("좋아요:" + result);
         	}
         	
-        	
           	$(".comment input[type=button]").click(insertcomment)
         	function insertcomment(){
+          		console.log("insertcomment");
         		var comment= $("#comment").val();
         		$.ajax({
-        			url:"${pageContext.request.getContextPath()}/insertcomment",
+        			url:"${pageContext.request.contextPath}/insertcomment",
         			data:{content:comment, idx:"${vo.idx}"},
-        			type:'get',
+        			type:"get",
         			dataType:"Json",
         			success:getcomment
         		}
@@ -202,14 +202,14 @@
             	$(this).closest('tr').after(html);
             } 
             
-            $(".writeboard").click(write_comment_comment)
-            function write_comment_comment(){
-            	
-            	$.ajax({
-            		data:
-            	});
-            }
             
+	       $(".writeboard").click(write_comment_comment)
+            function write_comment_comment(){
+            $.ajax({
+           	}
+            );
+       		}
+	       
       </script>
 </body>
 </html>

@@ -36,6 +36,7 @@ public class InsertCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("insertcomment doGet");
 		String idx= request.getParameter("idx");
 		String content= request.getParameter("content");
 		String depth=request.getParameter("depth");

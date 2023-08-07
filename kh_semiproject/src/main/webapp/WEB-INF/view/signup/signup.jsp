@@ -153,7 +153,7 @@
         		var idValue = $("input[name='id']").val();
         		$.ajax({
         			url:"${pageContext.request.contextPath}/checkid",
-        			type:"get",
+        			type:'get',
         			data: {id:idValue},
         			success: resultIdCheck
         		});
