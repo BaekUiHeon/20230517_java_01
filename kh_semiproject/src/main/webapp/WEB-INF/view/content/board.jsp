@@ -119,6 +119,7 @@
                     <c:if test="${mid!=item.id}">
                     <td><input type="button" id="writecomment" value="댓글달기"></td>
                     </c:if>
+                    
                     <c:if test="${mid==item.id}">
                     <td><input type="button" id="deletecomment" value="삭제"></td>
                     </c:if>
@@ -197,20 +198,18 @@
             $("#writecomment").click(writeboard)
             function writeboard(){
             	var html = $("<tr>"
-            				+"<td><input type='text'><td>"+"<td><input type='button' class='writeboard' value='작성'></td>"
+            				+"<td><input type='text'></td>"+"<td><input type='button' class='writeboard' value='작성'></td>"
             				+"</tr>");
-            	$(this).closest('tr').after(html);
+            	$(".writeboard").parent().parent().remove();
+            	$(this).parent().parent().after(html);
             } 
             
-            
-	       $(".writeboard").click(write_comment_comment)
+/* 	       $(".writeboard").click(write_comment_comment)
             function write_comment_comment(){
             $.ajax({
            	}
             );
-       		}
-	       
+       		} */
       </script>
 </body>
 </html>
-
