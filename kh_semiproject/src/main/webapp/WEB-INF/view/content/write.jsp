@@ -111,7 +111,9 @@
                 <td class="cols2"><textarea name=content required><c:if test="${content!=null}">${content}</c:if></textarea></td>
             </tr>
         </table>
+        <c:if test="${not empty idx}">
         <input type="hidden" name="idx" value="${idx}" >
+        </c:if>
         <input type="submit" value="완료">
     </form>
     <div>
