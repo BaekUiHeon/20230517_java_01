@@ -39,7 +39,7 @@
         font-weight: bold;
         color: black;
     }
-    .rootcomment{
+    input[type=text]{
         width: 715px;
         height: 20px;
     }
@@ -113,15 +113,15 @@
             <c:forEach items="${commentlist}" var="item">
                 <tr>
                 	<c:forEach begin="0" end="${item.depth - 1}" varStatus="loop">
-            		<td></td>
+            			<td></td>
         			</c:forEach>
-                    <td>${item}: ${item.content }</td>
-                    
+                    <td>${item.writer }: ${item.content }</td>
                     <c:if test="${mid!=item.id}">
-                    <td><input type="button" class="writecomment" value="댓글달기"><input type="hidden" value="${item.cidx}"></td>
-                    </c:if>    
+                    <td><input type="button" id="writecomment" value="댓글달기"></td>
+                    </c:if>
+                    
                     <c:if test="${mid==item.id}">
-                    <td><input type="button" class="deletecomment" value="삭제"><input type="hidden" value="${item.cidx}"></td> <%--삭제의경우 삭제처리후 다시뜨게하기보다 성공여부에 따라 여기만 삭제--%>
+                    <td><input type="button" id="deletecomment" value="삭제"></td>
                     </c:if>
                 </tr>
                 </c:forEach>
@@ -130,7 +130,7 @@
         <c:if test="${mid!=vo.id}">
         <div class="comment">
             <p>댓글작성</p>
-            <input type="text" id="comment" class="rootcomment">
+            <input type="text" id="comment">
             <input type="button" value="작성완료">
         </div>
         </c:if>
@@ -174,7 +174,8 @@
           	
           	function getcomment(data) {
           	    var commentlist = data.commentlist;
-          	    var table = $("<table></table>"); 
+          	    var table = $("<table></table>"); // 테이블 태그 생성
+
           	    $.each(commentlist, function(index, item) {
           	        var row = $("<tr></tr>");
 
@@ -184,9 +185,9 @@
 
           	        $("<td>" + item.writer + ":" + item.content + "</td>").appendTo(row);
           	        if ("${mid}" != item.id) {
-          	            $("<td><input type='button' value='댓글달기' id='writecomment'><input type='hidden' value='${item.cidx}'></td>").appendTo(row);
+          	            $("<td><input type='button' value='댓글달기' id='writecomment'></td>").appendTo(row);
           	        } else {
-          	            $("<td><input type='button' value='삭제' id='deletecomment'><input type='hidden' value='${item.cidx}'></td>").appendTo(row);
+          	            $("<td><input type='button' value='삭제' id='deletecomment'></td>").appendTo(row);
           	        }
           	        row.appendTo(table);
           	    });
@@ -194,50 +195,21 @@
           	    $("table").replaceWith(table);
           	}   	 
           	
-            $(".writecomment").click(writeboard)
+            $("#writecomment").click(writeboard)
             function writeboard(){
-            	var html = $("<td><input type='text' class='comment_comment'></td>"+"<td><input type='button' class='writeboard' value='작성'></td>");
-            	$(".writeboard").parent().remove();
-            	$(".comment_comment").parent().remove();
-            	$(this).parent().prev().after(html);
+            	var html = $("<tr>"
+            				+"<td><input type='text'></td>"+"<td><input type='button' class='writeboard' value='작성'></td>"
+            				+"</tr>");
+            	$(".writeboard").parent().parent().remove();
+            	$(this).parent().parent().after(html);
             } 
             
-            
-	       $(".writeboard").click(write_comment_comment)
+/* 	       $(".writeboard").click(write_comment_comment)
             function write_comment_comment(){
-	    	   var cidx=$(this).next().val();
             $.ajax({
-            	url:"${pageContext.request.contextPath}}/insertCommentServlet",
-            	data:{cidx:cidx},
-            	type:'get',
-            	dataType: "Json",
-            	success: get_comment_comment(data)
            	}
             );
-       		}
-       		
-      		$(".deletecomment").click(deletecomment)
-      		
-       		function deletecomment(){			
-       			var cidx=$(this).next().val();
-       			var $location= $(this).parent().parent();
-       			$.ajax({
-       				url:"${pageContext.request.contextPath}/deletecomment",
-       				data:{cidx:cidx},
-       				type:'get',
-       				success: function(data) {
-       		            dodeletecomment(data, $location); 
-       		        }
-       		    });
-       		}
-
-       		function dodeletecomment(data, $row) {
-       		    if (data == 1) {
-       		        $row.remove(); 
-       		    } else {
-       		        alert("삭제 실패");
-       		    }
-       		}
+       		} */
       </script>
 </body>
 </html>

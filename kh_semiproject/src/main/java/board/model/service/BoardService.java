@@ -17,11 +17,11 @@ public class BoardService {
 	private static Connection conn=null;
 
 	
-	public int deleteComment(String cidx) {
+	public int deleteComment(String idx,String cidx) {
 		int result=-1;
 		conn=getConnection();
 		BoardDao dao=new BoardDao();
-		result=dao.deleteComment(conn,cidx);
+		result=dao.deleteComment(conn,idx,cidx);
 		close(conn);
 		return result;
 	}

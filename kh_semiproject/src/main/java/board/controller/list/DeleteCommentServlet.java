@@ -34,20 +34,23 @@ public class DeleteCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idx=request.getParameter("idx");
 		String cidx=request.getParameter("cidx");
+
 		int result=0;
 		BoardService bs = new BoardService();
-		result=bs.deleteComment(cidx);   
+		result=bs.deleteComment(idx,cidx);   
 		
 		if(result==1)
 			System.out.println("댓글이 삭제되었습니다(from deleteCommentServlet)");
 		else
 			System.out.println("댓글 삭제실패(from deleteCommentServlet)");
-
+		
+		List<CommentVo> list=bs.getComment(cidx);
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(list));
 		PrintWriter out=response.getWriter();
-		out.print(result);
-		out.flush();
-		out.close();
+		out.print(gson.toJson(list));
 		System.out.println("json으로 보내기완료(from DeleteCommentServlet)");
 	}
 }
