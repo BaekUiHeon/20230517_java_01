@@ -379,14 +379,13 @@ public class BoardDao {
 		return result;
 	}
 
-	public int deleteComment(Connection conn, String idx, String cidx) {
+	public int deleteComment(Connection conn,String cidx) {
 		int result=-1;
-		String query="delete from tbl_comment where idx=? and cidx=?";
+		String query="delete from tbl_comment where cidx=?";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setString(1,idx);
-			pstmt.setString(2,cidx);
+			pstmt.setString(1,cidx);
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -397,7 +396,7 @@ public class BoardDao {
 		}
 		return result;
 	}
-	public int insertComment(Connection conn,String idx,String content,String mid) {
+ int insertComment(Connection conn,String idx,String content,String mid) {
 		int result=-1;
 		String query="insert into tbl_comment (idx,content,step,id) values(?,?,(select case when max(step) is null then 1 else max(step)+1 end as tbl from tbl_comment where idx=?),?)"; //완성처리해야함.
 		PreparedStatement pstmt=null;
