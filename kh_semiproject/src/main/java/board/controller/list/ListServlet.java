@@ -33,8 +33,8 @@ public class ListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("mid")!=null) { // 로그인 상태에서만 접속가능한 웹페이지
-		String searchWord=(String)request.getAttribute("searchWord");
-		String PageNoStr=(String)request.getAttribute("PageNo");
+		String searchWord=request.getParameter("searchWord");
+		String PageNoStr=request.getParameter("PageNo");
 		int currentPage=1;
 		int pageSize=10;
 		int pageBlockSize=10;
