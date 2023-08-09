@@ -152,9 +152,18 @@
                 <c:if test="${startPageNum!=1}">  <%--페이징 이전,번호,다음에 대한 코드 --%>
                 	<a href="<%=request.getContextPath()%>/list?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
                 </c:if>
+                <c:choose>
+                <c:when test="${not empty searchWord }">
                 <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 
                 <a href="<%=request.getContextPath()%>/list?currentPage=${i}&searchWord=${searchWord}"><span>${i} </span></a> <%--searchWord검사필요--%>
                 </c:forEach>
+                </c:when>
+                <c:otherwise>
+                <c:forEach begin="${startPageNum}" end="${endPageNum}" var="i"> 
+                <a href="<%=request.getContextPath()%>/list?currentPage=${i}"><span>${i} </span></a> <%--searchWord검사필요--%>
+                </c:forEach>
+                </c:otherwise>
+                </c:choose>
                 <c:if test="${endPageNum<totalPageNum}">
                 	<a href="<%=request.getContextPath()%>/list?currentPageNum=${endPageNum+1}&searchWord=${searchWord}">다음</a>
                 </c:if>
