@@ -55,7 +55,7 @@
         height: 270px;
         width: 494px
     }
-    input[type=submit]{
+    #write{
         position: relative;
         top: 57px;
         left: 720px;
@@ -89,9 +89,22 @@
         position: relative;
         left: 350px;
     }
+    .logout{
+     position:fixed;
+     top:40px;
+     left:920px;
+     background-color: gray;
+     color: black;
+    }
+
     </style>
 </head>
 <body>
+     <form action="<%=request.getContextPath()%>/logout" method="post">
+    <div class="logout">
+        <input type="submit" value="로그아웃">
+    </div>
+  </form>
 	<c:if test="${writeSucessFail==1}">
 		<script>
         alert('게시물작성이 실패하였습니다.');
@@ -114,7 +127,7 @@
         <c:if test="${not empty idx}">
         <input type="hidden" name="idx" value="${idx}" >
         </c:if>
-        <input type="submit" value="완료">
+        <input type="submit" id="write" value="완료">
     </form>
     <div>
         <a href="<%=request.getContextPath()%>/list" class="list">목록</a>

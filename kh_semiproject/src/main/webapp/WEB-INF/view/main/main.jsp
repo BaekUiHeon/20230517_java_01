@@ -61,10 +61,26 @@
         font-weight: bold;
         color: black;
     }
-    .logout{
+    .logout input{
         position: absolute;
+        font-weight: bold;
         bottom: 250px;
-        left: 470px;
+        left: 370px;
+        width: 80px;
+        font-size: 14px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        background-color: gray;
+        border:none;
+    }
+      .list a{
+        position: absolute;
+        color:black;
+        font-size: 14px;
+        font-weight: bold;
+        bottom: 250px;
+        left: 570px;
         width: 80px;
         height: 40px;
         text-align: center;
@@ -86,8 +102,13 @@
     </div>
     </c:if>
     <c:if test="${not empty mid}">
-      <div class="logout">
-        <a href="<%=request.getContextPath()%>/main?logout=1">로그아웃</a>
+    <form action="<%=request.getContextPath()%>/logout" method="post">
+    <div class="logout">
+        <input type="submit" value="로그아웃">
+    </div>
+    </form>
+    <div class="list">
+    	<a href="<%=request.getContextPath()%>/list">게시판으로</a>
     </div>
     </c:if>
     <div class="footer">

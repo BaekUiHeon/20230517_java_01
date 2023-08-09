@@ -88,9 +88,21 @@
         color: black;
         text-decoration: none;
     }
+    .logout{
+    	position:fixed;
+    	top:40px;
+    	left:920px;
+    	background-color: gray;
+        color: black;
+    }
     </style>
 </head>
 <body>
+  <form action="<%=request.getContextPath()%>/logout" method="post">
+    <div class="logout">
+        <input type="submit" value="로그아웃">
+    </div>
+  </form>
     <body>
         <div class="title">
             <p>커뮤니티 사이트</p>
@@ -189,13 +201,12 @@
           	      var td= $("<td>"+nb+ item.writer+ ": " + item.content + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + item.wdate+"</td>")
           	        td.appendTo(row);
           	        if ("${mid}" != item.id) {
-          	            $("<td><input type='button' value='댓글달기' class='writecomment'><input type='hidden' name='cidx'  value='"+item.cidx+"'></td><input type='hidden' name='idx'  value='"+item.idx+"'></td><input type='hidden' name='step'  value='"+item.step+"'></td><input type='hidden' name='depth'  value='"+item.depth+"'></td>").appendTo(row);
+          	            $("<td><input type='button' value='댓글달기' class='writecomment'><input type='hidden' name='cidx'  value='"+item.cidx+"'><input type='hidden' name='idx'  value='"+item.idx+"'><input type='hidden' name='step'  value='"+item.step+"'><input type='hidden' name='depth'  value='"+item.depth+"'></td>").appendTo(row);
           	        } else {
           	            $("<td><input type='button' value='삭제' class='deletecomment'><input type='hidden' name='cidx' value='"+item.cidx+"'></td>").appendTo(row);
           	        }
           	        row.appendTo(table);
           	    });
-          	
           	    $("table").replaceWith(table);
           	}   	 
           	

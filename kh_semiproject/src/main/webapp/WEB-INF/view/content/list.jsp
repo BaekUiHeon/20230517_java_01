@@ -73,7 +73,7 @@
     }
     .write{
         position: absolute;
-        bottom: 150px;
+        bottom: 140px;
         right: 120px;
         width: 80px;
         height: 40px;
@@ -103,9 +103,21 @@
     	bottom:80px;
     	left:400px;
     }
+    .logout{
+     position:fixed;
+     top:40px;
+     left:920px;
+     background-color: gray;
+     color: black;
+    }
 </style>
 </head>
 <body>
+    	 <form action="<%=request.getContextPath()%>/logout" method="post">
+    	<div class="logout">
+        <input type="submit" value="로그아웃">
+    	</div>
+  		</form>
 		<c:if test="${nullError==1}">
 		<script>
         alert('해당하는 게시물이 없습니다');
@@ -150,7 +162,14 @@
     		</table>
                <div class="paging">
                 <c:if test="${startPageNum!=1}">  <%--페이징 이전,번호,다음에 대한 코드 --%>
+                <c:choose>
+                <c:when test="${not empty searchWord}">
                 	<a href="<%=request.getContextPath()%>/list?currentPageNum=${startPageNum-1}&searchWord=${searchWord}">이전</a>
+                </c:when>
+                <c:otherwise>
+                	<a href="<%=request.getContextPath()%>/list?currentPageNum=${startPageNum-1}">이전</a>
+                </c:otherwise>
+                </c:choose>
                 </c:if>
                 <c:choose>
                 <c:when test="${not empty searchWord }">
@@ -165,7 +184,14 @@
                 </c:otherwise>
                 </c:choose>
                 <c:if test="${endPageNum<totalPageNum}">
-                	<a href="<%=request.getContextPath()%>/list?currentPageNum=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+                <c:choose>
+                <c:when test="${not empty searchWord}">
+                	<a href="<%=request.getContextPath()%>/list?currentPage=${endPageNum+1}&searchWord=${searchWord}">다음</a>
+                </c:when>
+                <c:otherwise>
+                	<a href="<%=request.getContextPath()%>/list?currentPage=${endPageNum+1}">다음</a>
+                </c:otherwise>
+                </c:choose>
                 </c:if>
            		</div>
             <div class="write"><a href="<%=request.getContextPath()%>/write">작성</a></div>
