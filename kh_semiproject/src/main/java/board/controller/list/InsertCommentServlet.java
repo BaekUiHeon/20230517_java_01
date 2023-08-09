@@ -38,7 +38,7 @@ public class InsertCommentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("insertcomment doGet");
 		String idx= request.getParameter("idx");
-		String content= request.getParameter("comment");
+		String content= request.getParameter("content");
 		String depth=request.getParameter("depth");
 		String step=request.getParameter("step");
 		String mid=(String)request.getSession().getAttribute("mid");
@@ -48,7 +48,6 @@ public class InsertCommentServlet extends HttpServlet {
 		System.out.println("idx번호:"+idx);
 		System.out.println("content:"+content);
 		if(cidx==null) {
-			System.out.println("참조댓글이 없을때 실행되는 commentinsert 서블릿 행동");
 			result=bs.insertComment(idx,content,mid);
 			if(result==1)
 				System.out.println("comment 입력완료.");
@@ -67,6 +66,7 @@ public class InsertCommentServlet extends HttpServlet {
 			System.out.println("commentlist 전송완료(from insertCommentServlet)");
 		}
 		
+
 		else {
 		result=bs.insertComment(idx,content,depth,step,mid,cidx);
 		

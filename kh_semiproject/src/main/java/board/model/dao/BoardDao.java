@@ -396,7 +396,7 @@ public class BoardDao {
 		}
 		return result;
 	}
-    public int insertComment(Connection conn,String idx,String content,String mid) {
+ int insertComment(Connection conn,String idx,String content,String mid) {
 		int result=-1;
 		String query="insert into tbl_comment (idx,content,step,id) values(?,?,(select case when max(step) is null then 1 else max(step)+1 end as tbl from tbl_comment where idx=?),?)"; //완성처리해야함.
 		PreparedStatement pstmt=null;
@@ -450,7 +450,7 @@ public class BoardDao {
 		int result=-1;
 		String query="update tbl_comment set step=step+1 where idx=? and step>?";
 		PreparedStatement pstmt=null;
-		System.out.println(idx+step);
+		
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,idx);
@@ -469,7 +469,7 @@ public class BoardDao {
 	
 	public List<CommentVo> getComment(Connection conn,String idx){ 
 		List<CommentVo> commentList=null;
-		String query="select idx,ccidx,depth,step,content,cidx,id,wdate,writer from ((select * from tbl_comment where idx=?) join tbl_writer using (id)) order by step asc,ccidx,step desc"; 
+		String query="select ccidx,depth,step,content,cidx,id,wdate,writer from ((select * from tbl_comment where idx=?) join tbl_writer using (id)) order by step asc,ccidx,step desc"; 
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		CommentVo vo=null;
@@ -482,7 +482,6 @@ public class BoardDao {
 			commentList=new ArrayList<CommentVo>();
 			while(rs.next()) {
 				vo= new CommentVo();
-				vo.setIdx(rs.getInt("idx"));
 				vo.setCcidx(rs.getInt("ccidx"));
 				vo.setdepth(rs.getInt("depth"));
 				vo.setStep(rs.getInt("Step"));
