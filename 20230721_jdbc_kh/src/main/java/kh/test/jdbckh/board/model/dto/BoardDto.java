@@ -21,9 +21,7 @@ public class BoardDto {
 	private int bref;
 	private int breLevel;
 	private int breStep;
-	// 1:n 관계
-	//private List<String> filepathList;
-	private List<AttachFileDto> attachFileList;
+//	private List<Member> memberList;
 
 	public BoardDto() {
 	}
@@ -64,12 +62,10 @@ public class BoardDto {
 		this.mid = mid;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bwriteDate=" + bwriteDate
-				+ ", mid=" + mid + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep
-				+ ", attachFileList=" + attachFileList + "]";
+				+ ", mid=" + mid + ", bref=" + bref + ", breLevel=" + breLevel + ", breStep=" + breStep + "]";
 	}
 	public int getBno() {
 		return bno;
@@ -118,12 +114,6 @@ public class BoardDto {
 	}
 	public void setBreStep(int breStep) {
 		this.breStep = breStep;
-	}
-	public List<AttachFileDto> getAttachFileList() {
-		return attachFileList;
-	}
-	public void setAttachFileList(List<AttachFileDto> attachFileList) {
-		this.attachFileList = attachFileList;
 	}
 	
 }

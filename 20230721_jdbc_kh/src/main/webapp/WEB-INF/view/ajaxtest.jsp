@@ -20,138 +20,51 @@
 <div class="grid-wrap">
 <div>학과이름</div><div>계열</div>
 </div>
-<div>
-	<h2>로그인</h2>
-	<form id="frm-login" >
-		id: <input type="text" name="mid" required="required"><br>
-		pw: <input type="password" name="mpwd" required="required"><br>
-		<button type="button" id=btnajax3>로그인</button>
-	</form>
-</div>
-<div>
-	<h2>여러회원가입(장바구니선택)</h2>
-	<div class="signup">
-		id: <input type="text" name="mid" required="required"><br>
-		pw: <input type="password" name="mpwd" required="required"><br>
-		이름: <input type="text" name="mname" required="required"><br>
-		이메일: <input type="text" name="memail" required="required"><br>
-	</div>
-	<div class="signup">
-		id: <input type="text" name="mid" required="required"><br>
-		pw: <input type="password" name="mpwd" required="required"><br>
-		이름: <input type="text" name="mname" required="required"><br>
-		이메일: <input type="text" name="memail" required="required"><br>
-	</div>
-	<div class="signup">
-		id: <input type="text" name="mid" required="required"><br>
-		pw: <input type="password" name="mpwd" required="required"><br>
-		이름: <input type="text" name="mname" required="required"><br>
-		이메일: <input type="text" name="memail" required="required"><br>
-	</div>
-	<button type="button" id=btnajax4>회원가입</button>
-</div>
 <script>
-$("#btnajax1").click(ajax1ClickHandler);
-$("#btnajax2").click(ajax2ClickHandler);
-$("#btnajax3").click(ajax3ClickHandler);
-$("#btnajax4").click(ajax4ClickHandler);
-function ajax4ClickHandler(){
-	var dataArr = [];  // js array - json 따옴표
-	$(".signup").each(function(idx){
-		var dataObj = {
-			mid: $(this).find("[name=mid]").val()
-			, mpwd:$(this).find("[name=mpwd]").val()
-			, mname: $(this).find("[name=mname]").val()
-			, memail:$(this).find("[name=memail]").val()
-			};
-		dataArr.push(dataObj);
-	});
-	console.log(dataArr);  // js array
-	console.log(JSON.stringify(dataArr));  // json 으로 변형 string형
-	$.ajax({
-		url:"${pageContext.request.contextPath}/ajax4"
-		,type:"post"
-		,data: JSON.stringify(dataArr)
-		,success: function(result){
-			console.log("success:");
-			console.log(result);
-		}
-		,error: function(){
-			console.log("error:");
-			console.log(result);
-		}
-	});
-}
-function ajax3ClickHandler(){
-	console.log("ajax3ClickHandler");
-	console.log( $("[name=mid]").val());
-	console.log( $("[name=mpwd]").val());
-	//form엘리먼트객체.serialize()
-	var dataQuery = $("#frm-login").serialize();
-	console.log(dataQuery);
-	$.ajax({
-		url:"${pageContext.request.contextPath}/ajax3"
-		,type:"post"
-		,data: $("#frm-login").serialize()
-			//{
-			//mid: $("[name=mid]").val(), 
-			//mpwd:$("[name=mpwd]").val() 
-			//}
-		,success: function(result){
-			console.log("success:");
-			console.log(result);
-		}
-		,error: function(){
-			console.log("error:");
-			console.log(result);
-		}
-	});
-}
-
-
-function ajaxSuccess(result){
-	console.log("ctrl로부터 전달받은 데이터 :");
+$("#btnajax1").click(ajax1ClickHandler);    // 1번 버튼 클릭시 실행될 함수
+$("#btnajax2").click(ajax2ClickHandler);	// 2번 버튼 클릭시 실행될 함수
+function ajaxSuccess(result){				// ajax에 사용할 함수 선언 
+	console.log("ctrl로부터 전달받은 데이터 :"); // 컨트롤러로 부터 받은 데이터를 콘솔에 출력할 생각임.
 	console.log(result);
 	alert(result);
 }
-function ajax1ClickHandler(){
-	console.log("btnajax1 click");
+function ajax1ClickHandler(){				// 1번 버튼 클릭시 실행될 함수에대한 정의 
+	console.log("btnajax1 click");			
 	//$.ajax(ojbect형태로매개인자전달해야함);
 	//var obj = {k1:12, k2:'dskfjsdf', k3:function(){}};
 	console.log("ajax로 데이터 전달 전-0");
-	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax1"
-		,type: "get"
-		,data: {n1:'값도가나?', n2:123} 
-		,success: ajaxSuccess
+	$.ajax({								// 이 함수가 실행되면 ajax도 실행됨. 그ajax에 대한 정의.
+		url: "${pageContext.request.getContextPath}/ajax1"		// 이동할 url
+		,type: "get"										// 보낼 type
+		,data: {n1:'값도가나?', n2:123} 						// 이동할떄 가져갈 data
+		,success: ajaxSuccess								// 값이 돌아왔을때 실행할 함수(인자1개)
 	});
 	console.log("ajax로 데이터 전달 중-1");
 }
-
-function ajax2ClickHandler(){
+function ajax2ClickHandler(){				// 2번 버튼 클릭시 실행될 함수에대한 정의 
 	console.log("btnajax2 click");
 	$.ajax({
-		url: "${pageContext.request.contextPath}/ajax2"
+		url: "${pageContext.request.getContextPath}/ajax2"
 		,type: "post"
-		,success: ajaxSuccess2
-		,dataType:"json"
+		,success: ajaxSuccess2								//실행될 데이터 이름 ajaxSuccess2		
+		,dataType:"json"									//여기서는 받을 datatype이 json임.
 	});
 }
-function ajaxSuccess2(result){
+function ajaxSuccess2(result){								//ajaxSuccess2에 대한 정의.
 	console.log("2 ctrl로부터 전달받은 데이터 :");
 	console.log(result);
 	console.log(result.deptList);
 	console.log(result.profList);
 	console.log(result.endPage);
 	console.log(result.startPage);
-	if(result){
+	if(result){												//Json으로 받은값(list)에서 해당컬럼이름별로 하나씩 꺼냄.
 		for(var i=0; i<result.deptList.length;i++){
 			var dvo = result.deptList[i];
-			console.log(dvo.departmentName);
-		}
+			console.log(dvo.departmentName);				// 꺼낸값 출력.
+		}	
 	}
 	
-	displayDepartment(result.deptList);
+	displayDepartment(result.deptList);						// 웹에 출력하도록 하는 함수.
 	
 }
 function displayDepartment(deptList){
@@ -164,10 +77,5 @@ function displayDepartment(deptList){
 	$('.grid-wrap').html(htmlVal);	
 }
 </script>
-
-
-
-
-
 </body>
 </html>
