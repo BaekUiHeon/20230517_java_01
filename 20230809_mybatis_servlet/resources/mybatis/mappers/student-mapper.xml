@@ -16,12 +16,12 @@
 
 	<!-- resultType="DepartmentDto2" 이렇게 사용 불가. 컬럼명과 필드명이 다름. -->
 	<!-- resultMap=""과 resultType="" 둘 중 하나만 작성해야함.  list, arraylist 는 result에 사용하지 않음.-->	
-	<select id="selectList0" resultMap="resultMap3" >
+	<select id="selectList0" resultMap="resultMap3" > 
 		SELECT student_No, department_No, student_Name, student_Ssn, student_Address, 
 			to_char(entrance_Date, 'yyyy-mm-dd'), absence_Yn, coach_Professor_No
 		FROM TB_student
 	</select>
-	<select id="selectOne0" resultMap="resultMap3" parameterType="string" >
+	<select id="selectOne0" resultMap="resultMap3" parameterType="string" > <!-- parameterType은 입력값 -->
 		SELECT student_No, department_No, student_Name, student_Ssn, student_Address, 
 			to_char(entrance_Date, 'yyyy-mm-dd'), absence_Yn, coach_Professor_No
 		FROM TB_student

@@ -278,7 +278,7 @@ public class BoardDao {
 			pstmt=conn.prepareStatement(query);
 			String searchWord1="%"+searchWord+"%";
 			pstmt.setString(1, searchWord1);
-			pstmt.setString(1, searchWord1);
+			pstmt.setString(2, searchWord1);
 			rs=pstmt.executeQuery();
 			if(rs.next()==true)
 				result=rs.getInt("total_count");
