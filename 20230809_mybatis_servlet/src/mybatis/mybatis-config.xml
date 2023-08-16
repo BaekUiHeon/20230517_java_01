@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
-<configuration>
-	<settings>
+<configuration>  <!-- 전체틀 -->
+	<settings>   <!--데이터베이스연결, 매핑, 캐싱 , 트랜잭션등 Mybatis의 전반적인 동작방식에 영향을 줌 -->
 		<!-- 대소문자완전구분함. null 값 처리  -->
 		<setting name="jdbcTypeForNull" value="NULL"/>
 		<!-- _ 를 카멜기법으로  
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
-		 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>  -->
 	</settings>
 
-	<typeAliases>
+	<typeAliases> <!-- 자료형에 별칭을 붙여준다.(mapper.xml에 적용될것임) -->
 		<typeAlias type="kh.test.mybatis.department.model.dto.DepartmentDto" alias="DepartmentDto2"/>
 	</typeAliases>
 	
-	<environments default="development2">
-		<environment id="development1">
-			<transactionManager type="JDBC"></transactionManager>
-			<dataSource type="POOLED">
+	<environments default="development2"> <!-- default Connection값 설정 -->
+		<environment id="development1">  <!-- development2의 connection에 관련된 정의 -->
+			<transactionManager type="JDBC"></transactionManager> <!-- 변동없음 안에값 외우기 -->
+			<dataSource type="POOLED"> <!-- 변동없음 안에값 외우기 -->
 				<property name="driver" value="jdbc.driver=oracle.jdbc.driver.OracleDriver"/>
 				<property name="url" value="jdbc.url=jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
 				<property name="username" value="jdbc.username=kh"/>
@@ -37,7 +36,7 @@
 	
 	<mappers>
 		<!-- namespace가 중요 구분자가 됨. 각각 unique한 이름을로 지어주세요. -->
-		<mapper resource="./mappers/department-mapper.xml"/>
+		<mapper resource="./mappers/department-mapper.xml"/> <!-- 상대경로로 이xml과 연동될 mapper선언 -->
 		<mapper resource="./mappers/board-mapper.xml"/>
 	</mappers>
 
