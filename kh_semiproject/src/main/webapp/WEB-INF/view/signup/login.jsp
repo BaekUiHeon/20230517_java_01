@@ -55,13 +55,13 @@
     }
     .IdInfo{
         position:fixed;
-        left: 670px;
-        top: 210px;
+        left: 660px;
+        top: 190px;
     }
     .PassInfo{
         position:fixed;
-        left: 670px;
-        top: 250px;
+        left: 660px;
+        top: 230px;
     }
     button{
         position: absolute;

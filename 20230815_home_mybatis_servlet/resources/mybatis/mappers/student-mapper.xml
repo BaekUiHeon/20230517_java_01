@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "student">
+	
+	<resultMap type="StudentVo" id="resultMap1">
+		<id property="studentNo" column="student_No"/>
+		<result property="departmentNo" column="department_no"/>
+		<result property="studentName" column="student_Name"/>
+		<result property="studentSsn" column="student_Ssn"/>
+		<result property="studentAddress" column="student_Address"/>
+		<result property="entranceDate" column="entrance_Date"/>
+		<result property="absenceYn" column="absence_Yn"/>
+		<result property="coachProfessorNo" column="coach_Professor_No"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="resultMap1">
+		SELECT student_No, department_No, student_Name, student_Ssn, student_Address, 
+			to_char(entrance_Date, 'yyyy-mm-dd'), absence_Yn, coach_Professor_No
+		FROM TB_student
+	</select>
+</mapper>

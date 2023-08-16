@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>						
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases> 
+		<typeAlias type="kh.test.mybatis.department.model.dto.DepartmentDto" alias="DepartmentDto2"/>
+		<typeAlias type="kh.test.mybatis.student.model.vo.StudentVo" alias="StudentVo2"/>
+	</typeAliases>
+	
+	<environments default="development1">
+		<environment id="development1">
+			<transactionManager type="JDBC"></transactionManager>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="username" value="kh"/>
+				<property name="password" value="kh"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="mybatis/mappers/student-mapper.xml"/>
+	</mappers>
+
+</configuration>
+
+
+<!-- 		<environment id="development2">
+			<transactionManager type="JDBC"></transactionManager>
+			TODO POOLED
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+				<property name="username" value="scott"/>
+				<property name="password" value="tiger"/>
+			</dataSource>
+		</environment> -->
