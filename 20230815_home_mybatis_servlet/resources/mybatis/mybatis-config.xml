@@ -3,7 +3,7 @@
 
 <configuration>
 	<settings>
-		<setting name="JdbcTypeForNull" value="NULL" />
+		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 
 	<typeAliases>
@@ -15,8 +15,8 @@
 		<environment id="student1">
 			<transactionManager type="JDBC"></transactionManager>
 			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
 				<property name="username" value="kh" />
 				<property name="password" value="kh" />
 			</dataSource>
@@ -25,7 +25,7 @@
 
 
 	<mappers>
-		<mapper resource="mybatis/mappers/student-mapper.xml" />
+		<mapper resource="mybatis/mappers/student-mapper.xml"/>
 	</mappers>
 	
 </configuration>
