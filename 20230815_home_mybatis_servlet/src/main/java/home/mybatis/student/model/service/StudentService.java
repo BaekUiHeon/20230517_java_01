@@ -20,7 +20,7 @@ public class StudentService {
 	
 	public List<StudentVo> selectList(){
 		List<StudentVo> result = null;
-		SqlSession session = getsqlSession();
+		SqlSession session = getSession();
 		result = dao.selectList(session);
 		session.close();
 		return result;
